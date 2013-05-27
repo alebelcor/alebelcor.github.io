@@ -12,6 +12,8 @@ Have you ever wondered:
 
 Me too! so here's what I found out with an example for each one.
 
+<!--more-->
+
 CSS 1
 -----
 

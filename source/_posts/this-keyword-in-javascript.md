@@ -9,6 +9,8 @@ What does `this` mean?
 
 Short answer, it depends.
 
+<!--more-->
+
 In general terms, you could say that the `this` keyword, in JavaScript, refers to
 the function's context, how it's invoked. There are four ways in which a function
 can be invoked: method form, function form, constructor form and apply form.

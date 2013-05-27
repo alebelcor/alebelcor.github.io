@@ -8,6 +8,7 @@ tags:
 HTML5 introduces lots of new and exciting things for web authors, among these are new APIs.
 Here are some of them.
 
+<!--more-->
 
 ### [Application Cache API](http://dev.w3.org/html5/spec-author-view/spec.html#application-cache-api)
 

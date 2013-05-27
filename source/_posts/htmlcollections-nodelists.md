@@ -14,6 +14,8 @@ var myLinks = document.getElementsByTagName('a'); // we have three links
 myLinks.length; // "3"
 ```
 
+<!--more-->
+
 We later found out that the things we thought were arrays, were instead
 array-like objects. But how exactly are they like arrays? Those "array-like"
 objects/elements/things, most of the time, are either HTMLCollections or

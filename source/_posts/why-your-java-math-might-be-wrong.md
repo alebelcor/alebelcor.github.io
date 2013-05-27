@@ -5,6 +5,9 @@ tags:
 ---
 
 We all know that mathematical operations with decimals in JavaScript are no good.
+
+<!--more-->
+
 For instance:
 
 ```javascript

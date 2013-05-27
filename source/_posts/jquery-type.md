@@ -8,6 +8,8 @@ tags:
 In my last post I wrote about how to detect a JavaScript array, so I thought it
 would be a good idea to see how jQuery does it.
 
+<!--more-->
+
 Here's the `jQuery.isArray` method (in 1.6.2):
 
 ```javascript

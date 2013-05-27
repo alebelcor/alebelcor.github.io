@@ -6,6 +6,8 @@ tags:
 
 We all know global variables in JavaScript are bad.
 
+<!--more-->
+
 If you declare a bunch of variables/functions in the global namespace they
 become properties of the global object, in the browser that would be the `window`
 object.

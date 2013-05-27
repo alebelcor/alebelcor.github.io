@@ -6,6 +6,8 @@ tags:
 
 "Piece of cake" I bet you're thinking, oh I wish it were that easy.
 
+<!--more-->
+
 But fear not, JavaScript does have the `typeof` operator (returns a string) which
 is very useful for type-checking:
 

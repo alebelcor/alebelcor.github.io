@@ -8,6 +8,8 @@ Yesterday I came across an [article](https://news.ycombinator.com/item?id=576635
 on Hacker News about [Hexo](http://zespia.tw/hexo), a blogging platform for
 Node.js ala Jekyll/Octopress.
 
+<!--more-->
+
 It immediately caught my eye because I had a nasty time trying to setup Octopress
 the other day. To be fair, it's not its fault, Windows is not a very Ruby-friendly
 environment. And they are both somewhat similar.

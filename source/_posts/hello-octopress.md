@@ -7,6 +7,8 @@ tags:
 Obligatory first post that I'll probably delete because I just started experimenting with
 Octopress, Jekyll and Ruby... ON WINDOWS, yeah.
 
+<!--more-->
+
 It goes without saying it was a **VERY** painful process and I may blog about this traumatizing
 process in the future.
 

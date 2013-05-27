@@ -10,6 +10,8 @@ Things I Learned from the jQuery Source" and this time I was quite amazed when
 Paul Irish talked about `parseJSON`. And the reason was the way jQuery makes the
 JSON object, it's clever, it's very clever.
 
+<!--more-->
+
 Let me show you. Here's jQuery's 1.5.2 `parseJSON` method:
 
 ```javascript

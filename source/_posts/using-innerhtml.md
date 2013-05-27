@@ -8,6 +8,7 @@ tags:
 `innerHTML` is a read/write property of a DOM element that gets/sets the HTML
 contained in the element.
 
+<!--more-->
 
 It's fast
 ---------

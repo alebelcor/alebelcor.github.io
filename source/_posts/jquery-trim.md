@@ -7,6 +7,8 @@ tags:
 
 Do you want to know how the trim method works in jQuery? Today is lucky day.
 
+<!--more-->
+
 Here's the code from the jQuery 1.5.2 source, I separated distant lines of code
 with three dots:
 

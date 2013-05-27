@@ -9,7 +9,7 @@ Manipulating elements
 ---------------------
 
 Once you have access to an element, you can manipulate it using assignment of
-object properties or DOM methods. Let's take a look at the examples:
+object properties or DOM methods. <!--more--> Let's take a look at the examples:
 
 ### HTML
 

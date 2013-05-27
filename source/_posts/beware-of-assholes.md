@@ -11,6 +11,7 @@ their peers/superiors/underlings.
 is someone who is probably having a bad day or a bad moment. Certified assholes
 are persistently nasty and destructive jerks.
 
+<!--more-->
 
 Why are they dangerous?
 -----------------------

@@ -8,6 +8,7 @@ tags:
 Today I'm going to talk about the DOM. Things you might not know, tricks,
 nuances and some best practices (I think). So, let's get to it.
 
+<!--more-->
 
 `<script>`
 ----------

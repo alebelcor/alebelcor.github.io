@@ -8,6 +8,8 @@ Billy Hoffman, xo-author of "Ajax Security", has a very interesting talk about
 JavaScript named "The Evil Parts" where he talks about the "evil" things a person
 can accomplish using JavaScript.
 
+<!--more-->
+
 One of the things he shows us are two functions, a dehydrate and a hydrate function.
 He uses them to hide/display malicious code, to "dehydrate" JavaScript, so the
 code is transformed into whitespace and tabs, therefore becoming invisible.
