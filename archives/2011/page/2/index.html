@@ -67,157 +67,6 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2011-07-21T17:30:00.000Z">
-          Jul 21st, 2011
-        </time>
-      
-      
-  
-    <h1 class="title"><a href="/2011/how-to-detect-a-javascript-array/">How to detect a JavaScript array</a></h1>
-  
-
-
-    </header>
-    <div class="entry">
-      
-        <p>&quot;Piece of cake&quot; I bet you&#39;re thinking, oh I wish it were that easy.</p>
-<p>But fear not, JavaScript does have the <code>typeof</code> operator (returns a string) which
-is very useful for type-checking:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="keyword">var</span> str  = <span class="string">'hello'</span>,
-    num  = <span class="number">64</span>,
-    bool = <span class="literal">false</span>,
-    func = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>},
-    undef;
-
-<span class="keyword">typeof</span> str;   <span class="comment">// "string"</span>
-<span class="keyword">typeof</span> num;   <span class="comment">// "number"</span>
-<span class="keyword">typeof</span> bool;  <span class="comment">// "boolean"</span>
-<span class="keyword">typeof</span> func;  <span class="comment">// "function"</span>
-<span class="keyword">typeof</span> undef; <span class="comment">// "undefined"</span>
-</pre></td></tr></table></figure>
-
-<p>Like shown in the previous code, it works fine for most things. However, it&#39;s a little flawed:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="keyword">var</span> n   = <span class="literal">null</span>,
-    str = <span class="keyword">new</span> String(<span class="string">'hello'</span>), <span class="comment">// any wrapper function or custom constructor</span>
-    arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
-
-<span class="keyword">typeof</span> n;   <span class="comment">// "object", which is wrong</span>
-<span class="keyword">typeof</span> str; <span class="comment">// "object", which is correct but not very useful.</span>
-<span class="keyword">typeof</span> arr; <span class="comment">// "object", which is correct but not very useful.</span>
-</pre></td></tr></table></figure>
-
-
-<h2><code>constructor</code> property</h2>
-<p>Every created object has a <code>constructor</code> property that points to the function
-that created the object&#39;s prototype. You can leverage that reference to do some
-accurate detections:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre><span class="keyword">var</span> str    = <span class="keyword">new</span> String(<span class="string">'hello'</span>),
-    arr    = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],
-    Person = <span class="function"><span class="keyword">function</span> <span class="params">(name)</span> {</span>
-        <span class="keyword">this</span>.name = name;
-    },
-    obj;
-
-obj = <span class="keyword">new</span> Person(<span class="string">'John'</span>);
-
-obj.constructor === Person; <span class="comment">// true</span>
-str.constructor === String; <span class="comment">// true</span>
-arr.constructor === Array;  <span class="comment">// true</span>
-</pre></td></tr></table></figure>
-
-
-<h2><code>isArray</code> method</h2>
-<p>ECMAScript 5 defines a new method for the <code>Array</code> function called <code>isArray</code>.
-If it&#39;s not implemented by the browser you can define it like this:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="keyword">if</span> (!Array.hasOwnProperty(<span class="string">'isArray'</span>)) {
-    Array.isArray = <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
-        <span class="keyword">return</span> Object.prototype.toString.call(value) === <span class="string">'[object Array]'</span>;
-    };
-}
-</pre></td></tr></table></figure>
-
-<p>Invoking the <code>toString</code> method of <code>Object</code>, gets us a string representation of
-the object, for arrays it&#39;s <code>[object Array]</code>:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="keyword">var</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],
-    arr2 = <span class="keyword">new</span> Array(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);
-
-Array.isArray(arr1);             <span class="comment">// true</span>
-Array.isArray(arr2);             <span class="comment">// true</span>
-Array.isArray(<span class="keyword">new</span> Number(<span class="string">'12'</span>)); <span class="comment">// false</span>
-Array.isArray({});               <span class="comment">// false</span>
-</pre></td></tr></table></figure>
-
-<p>Sources:</p>
-<p><a href="http://goo.gl/qGNiS">typeof operator (MDC)</a></p>
-<p><a href="http://goo.gl/oOmxS">constructor property (MDC)</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2011/how-to-detect-a-javascript-array/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2011-07-09T22:57:00.000Z">
           Jul 9th, 2011
         </time>
@@ -233,145 +82,6 @@ Array.isArray({});               <span class="comment">// false</span>
       
         <h2>What does <code>this</code> mean?</h2>
 <p>Short answer, it depends.</p>
-<p>In general terms, you could say that the <code>this</code> keyword, in JavaScript, refers to
-the function&#39;s context, how it&#39;s invoked. There are four ways in which a function
-can be invoked: method form, function form, constructor form and apply form.</p>
-<h2>Method form</h2>
-<p>If a function is invoked in the method form, <code>this</code> will be bound to the object
-that owns the function:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre><span class="keyword">var</span> myObj = {
-    name   : <span class="string">'Chuck'</span>,
-    sayName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-        <span class="keyword">return</span> <span class="string">'Hello '</span> + <span class="keyword">this</span>.name;
-    }
-};
-
-myObj.sayName(); <span class="comment">// `this` refers to myObj, returns 'Hello Chuck'</span>
-</pre></td></tr></table></figure>
-
-
-<h2>Function form</h2>
-<p>This means taking a function value and calling it. In ECMAScript 3, <code>this</code> would
-be bound to the global object:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="keyword">var</span> myFunc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="keyword">return</span> <span class="keyword">this</span>.location.href;
-};
-
-myFunc(); <span class="comment">// `this` refers to window (in browsers), returns the current URL</span>
-</pre></td></tr></table></figure>
-
-<p>In ECMAScript 5 Strict Mode (<a href="http://goo.gl/0V8Ef">almost fully supported</a>), <code>this</code>
-was changed so that it would refer to <code>undefined</code> instead:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="keyword">var</span> myFunc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="string">'use strict'</span>;
-    <span class="keyword">return</span> <span class="keyword">this</span>.location.href;
-};
-
-myFunc(); <span class="comment">// error, `this` is undefined</span>
-</pre></td></tr></table></figure>
-
-
-<h2>Constructor form</h2>
-<p>A constructor function is meant to be called using the <code>new</code> keyword, in this
-form, <code>this</code> will refer to the object being produced:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="keyword">var</span> MyConstructor = <span class="function"><span class="keyword">function</span> <span class="params">(name)</span> {</span>
-    <span class="keyword">this</span>.name    = name;
-    <span class="keyword">this</span>.sayName = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-        <span class="keyword">return</span> <span class="string">'Hello '</span> + <span class="keyword">this</span>.name;
-    };
-};
-
-<span class="keyword">var</span> myObj = <span class="keyword">new</span> MyConstructor(<span class="string">'Chuck'</span>);
-
-myObj.name;      <span class="comment">// 'Chuck'</span>
-myObj.sayName(); <span class="comment">// 'Hello Chuck'</span>
-</pre></td></tr></table></figure>
-
-
-<h2>Apply form</h2>
-<p>Functions are objects and, as most objects, they have methods. This form refers
-to using the function&#39;s methods <code>apply</code> or <code>call</code> to call a function. Both
-methods take whatever first argument you pass and bound <code>this</code> to it. They differ
-in the way they provide the arguments to the function being invoked.</p>
-<p>The <code>apply</code> method takes an array of arguments:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-</pre></td><td class="code"><pre><span class="keyword">var</span> myObj1 = {
-    name: <span class="string">'Chuck'</span>
-};
-
-<span class="keyword">var</span> myObj2 = {
-    name: <span class="string">'Charles'</span>
-};
-
-<span class="keyword">var</span> sayWelcome = <span class="function"><span class="keyword">function</span> <span class="params">(location)</span> {</span>
-    <span class="keyword">return</span> <span class="string">'Hello '</span> + <span class="keyword">this</span>.name + <span class="string">'. Welcome to '</span> + location;
-};
-
-sayWelcome.apply(myObj1, [<span class="string">'New York'</span>]); <span class="comment">// 'Hello Chuck. Welcome to New York'</span>
-sayWelcome.apply(myObj2, [<span class="string">'Toronto'</span>]);  <span class="comment">// 'Hello Charles. Welcome to Toronto'</span>
-</pre></td></tr></table></figure>
-
-<p>The <code>call</code> method takes a list of arguments separated by commas:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre>sayWelcome.call(myObj1, <span class="string">'New York'</span>); <span class="comment">// 'Hello Chuck. Welcome to New York'</span>
-sayWelcome.call(myObj2, <span class="string">'Toronto'</span>);  <span class="comment">// 'Hello Charles. Welcome to Toronto'</span>
-</pre></td></tr></table></figure>
-
-<h2>Summary</h2>
-<p>The value of <code>this</code> depends on the calling form:</p>
-<ul>
-<li>Method form: it&#39;s bound to the object containing the method.</li>
-<li>Function form: it&#39;s bound to either the global object (ECMAScript 3), or to
-<code>undefined</code> in (ECMAScript 5 Strict Mode).</li>
-<li>Constructor form: it&#39;s bound to the new object being constructed.</li>
-<li>Apply form: it&#39;s bound to the first argument passed to <code>apply</code> or <code>call</code>.</li>
-</ul>
-<p>Source:</p>
-<p><a href="http://goo.gl/s9vkC">Crockford on JavaScript - Act III: Function the Ultimate</a></p>
 
       
     </div>
@@ -379,7 +89,7 @@ sayWelcome.call(myObj2, <span class="string">'Toronto'</span>);  <span class="co
       
         
           <div class="alignleft">
-            <a href="/2011/this-keyword-in-javascript/#more" class="more-link">Read More</a>
+            <a href="/2011/this-keyword-in-javascript/" class="more-link">Read More</a>
           </div>
         
         
@@ -388,6 +98,7 @@ sayWelcome.call(myObj2, <span class="string">'Toronto'</span>);  <span class="co
     </footer>
   </div>
 </article>
+
 
 
 
@@ -411,67 +122,7 @@ sayWelcome.call(myObj2, <span class="string">'Toronto'</span>);  <span class="co
     </header>
     <div class="entry">
       
-        <p>We all know that mathematical operations with decimals in JavaScript are no good.
-For instance:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="number">1.1</span> + <span class="number">2.2</span>; <span class="comment">// should be 3.3, but the result is 3.3000000000000003</span>
-</pre></td></tr></table></figure>
-
-<p>It turns out this is a cross to bare for pretty much any language that uses the
-IEEE-754 standard to implement a floating point number and that includes...
-<em>drums</em>... <strong>Java</strong>.</p>
-<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="comment">// Adding doubles</span>
-System.out.println(<span class="number">1.1</span> + <span class="number">2.2</span>);   <span class="comment">// 3.3000000000000003</span>
-
-<span class="comment">// Adding floats</span>
-System.out.println(<span class="number">1.1</span>f + <span class="number">2.2</span>f); <span class="comment">// 3.3000002</span>
-</pre></td></tr></table></figure>
-
-<p>So if you&#39;re doing these kinds of operations with <code>float</code> or <code>double</code> in Java you
-might be doing them wrong.</p>
-<p>This is huge because an application that deals with money is almost certain to
-have to deal with decimals. You have to get it right or you&#39;ll be in a lot of trouble.</p>
-<blockquote><p>People have a reasonable expectation that when you’re adding up their money
-you’re going to come up with the right result, and you don’t.</p>
-<footer><strong>Douglas Crockford</strong></footer></blockquote>
-
-<p><code>float</code> and <code>double</code> should never be used for currency or high precision operations.</p>
-<p>The proper way to do this is using the <code>BigDecimal</code> class. Check out the
-<a href="http://goo.gl/r78E1">documentation</a>.</p>
-<p>Let&#39;s try it again, this time using <code>BigDecimal</code>:</p>
-<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>BigDecimal num1 = <span class="keyword">new</span> BigDecimal(<span class="number">1.1</span>);
-BigDecimal num2 = <span class="keyword">new</span> BigDecimal(<span class="number">2.2</span>);
-System.out.println(num1.add(num2)); <span class="comment">// 3.30000000000000026645352591003756...etc.</span>
-</pre></td></tr></table></figure>
-
-<p>Oh noes! what happened? I thought <code>BigDecimal</code> was supposed to solve all my problems.</p>
-<p>Hold on, take another look at the code above. You&#39;ll notice we&#39;re constructing our
-<code>BigDecimal</code> objects using a... <em>drums</em>... <code>double</code>.</p>
-<p>So? Well, that&#39;s the deal with <code>float</code> and <code>double</code>, it&#39;s why they should not be
-used in these operations. They cannot accurately represent numbers with decimals.</p>
-<p>OK, how do we fix this? There&#39;s a constructor that takes a <code>String</code> argument
-(didn&#39;t you look at the documentation?). That&#39;s how we should always do it. Pass
-a <code>String</code> so you won&#39;t lose precision:</p>
-<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>BigDecimal num3 = <span class="keyword">new</span> BigDecimal(<span class="string">"1.1"</span>);
-BigDecimal num4 = <span class="keyword">new</span> BigDecimal(<span class="string">"2.2"</span>);
-System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
-</pre></td></tr></table></figure>
-
-<p>Perfect! now lawsuits won&#39;t be falling from the sky.</p>
-<p>Sources:</p>
-<p><a href="http://goo.gl/73HT9">Representing money</a></p>
-<p><a href="http://goo.gl/DE0Aw">Beware of floating point numbers</a></p>
+        <p>We all know that mathematical operations with decimals in JavaScript are no good.</p>
 
       
     </div>
@@ -479,7 +130,7 @@ System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
       
         
           <div class="alignleft">
-            <a href="/2011/why-your-java-math-might-be-wrong/#more" class="more-link">Read More</a>
+            <a href="/2011/why-your-java-math-might-be-wrong/" class="more-link">Read More</a>
           </div>
         
         
@@ -488,6 +139,91 @@ System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
     </footer>
   </div>
 </article>
+
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-05-26T18:00:00.000Z">
+          May 26th, 2011
+        </time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/how-to-hide-your-javascript-code/">How to hide your JavaScript code</a></h1>
+  
+
+
+    </header>
+    <div class="entry">
+      
+        <p>Billy Hoffman, xo-author of &quot;Ajax Security&quot;, has a very interesting talk about
+JavaScript named &quot;The Evil Parts&quot; where he talks about the &quot;evil&quot; things a person
+can accomplish using JavaScript.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/how-to-hide-your-javascript-code/" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-05-19T18:00:00.000Z">
+          May 19th, 2011
+        </time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/how-many-global-variables-are-there/">How many global variables are there?</a></h1>
+  
+
+
+    </header>
+    <div class="entry">
+      
+        <p>We all know global variables in JavaScript are bad.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/how-many-global-variables-are-there/" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
 
 
 
@@ -564,6 +300,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

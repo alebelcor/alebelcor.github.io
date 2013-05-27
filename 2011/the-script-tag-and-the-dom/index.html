@@ -76,6 +76,7 @@
     <div class="entry">
       
         
+          
   <div class="addthis addthis_toolbox addthis_default_style">
     
       <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -91,8 +92,11 @@
   <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51a2a190502ebfe9"></script>
 
 
+        
         <p>Today I&#39;m going to talk about the DOM. Things you might not know, tricks,
 nuances and some best practices (I think). So, let&#39;s get to it.</p>
+<a name="more"></a>
+
 <h2><code>&lt;script&gt;</code></h2>
 <p>It first appeared in Netscape Navigator 2 as a way to put programs in HTML
 documents and it then became part of the HTML standard in version 4.</p>
@@ -255,6 +259,14 @@ below to watch the video.</p>
 </article>
 
 
+<section id="comment">
+  <h1 class="title">Comments</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -317,6 +329,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

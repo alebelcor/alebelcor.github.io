@@ -83,39 +83,6 @@
         <p>Yesterday I came across an <a href="https://news.ycombinator.com/item?id=5766352">article</a>
 on Hacker News about <a href="http://zespia.tw/hexo">Hexo</a>, a blogging platform for
 Node.js ala Jekyll/Octopress.</p>
-<p>It immediately caught my eye because I had a nasty time trying to setup Octopress
-the other day. To be fair, it&#39;s not its fault, Windows is not a very Ruby-friendly
-environment. And they are both somewhat similar.</p>
-<p>With both you can:</p>
-<ul>
-<li>Write posts in <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</li>
-<li>Compile them to static files.</li>
-<li>Theme your blog.</li>
-<li>etc.</li>
-</ul>
-<p>And best of all, at least for me, since it&#39;s running on Node.js, it is
-cross-platform and works on Windows (yay). So I gave it a try.</p>
-<p>To create a new post:</p>
-<pre><code><span class="title">hexo</span> new post <span class="string">"My post title"</span>
-</code></pre>
-<p>To generate HTML:</p>
-<pre><code><span class="title">hexo</span> generate
-</code></pre>
-<p>To watch files for changes (and generate):</p>
-<pre><code><span class="title">hexo</span> generate -w
-</code></pre>
-<p>To launch a server to look at the results.</p>
-<pre><code><span class="title">hexo</span> server
-</code></pre>
-<p>Note: Once the server has been launched, it looks like it won&#39;t pick up any
-changes you do, you&#39;ll have to relaunch it. Bummer, I know. But until this is
-fixed you can work around it using <a href="http://gruntjs.com">Grunt</a> and launching your
-own server with the
-<a href="https://github.com/gruntjs/grunt-contrib-connect">grunt-contrib-connect plugin</a>.</p>
-<p>I migrated all my old posts from my blogger site and I have been editing partials
-and CSS to make the theme look nicer.</p>
-<p>Hopefully it&#39;ll get more Octopress plugins migrated and better looking themes.</p>
-<p>If you&#39;re curious check out the <a href="http://zespia.tw/hexo/docs/">documentation</a>.</p>
 
       
     </div>
@@ -123,7 +90,7 @@ and CSS to make the theme look nicer.</p>
       
         
           <div class="alignleft">
-            <a href="/2013/hello-hexo/#more" class="more-link">Read More</a>
+            <a href="/2013/hello-hexo/" class="more-link">Read More</a>
           </div>
         
         
@@ -132,6 +99,7 @@ and CSS to make the theme look nicer.</p>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -157,9 +125,6 @@ and CSS to make the theme look nicer.</p>
       
         <p>Obligatory first post that I&#39;ll probably delete because I just started experimenting with
 Octopress, Jekyll and Ruby... ON WINDOWS, yeah.</p>
-<p>It goes without saying it was a <strong>VERY</strong> painful process and I may blog about this traumatizing
-process in the future.</p>
-<p>Alrighty then. Bye bye.</p>
 
       
     </div>
@@ -167,7 +132,7 @@ process in the future.</p>
       
         
           <div class="alignleft">
-            <a href="/2013/hello-octopress/#more" class="more-link">Read More</a>
+            <a href="/2013/hello-octopress/" class="more-link">Read More</a>
           </div>
         
         
@@ -176,6 +141,7 @@ process in the future.</p>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -248,6 +214,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

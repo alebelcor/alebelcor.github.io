@@ -80,67 +80,7 @@
     </header>
     <div class="entry">
       
-        <p>We all know that mathematical operations with decimals in JavaScript are no good.
-For instance:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="number">1.1</span> + <span class="number">2.2</span>; <span class="comment">// should be 3.3, but the result is 3.3000000000000003</span>
-</pre></td></tr></table></figure>
-
-<p>It turns out this is a cross to bare for pretty much any language that uses the
-IEEE-754 standard to implement a floating point number and that includes...
-<em>drums</em>... <strong>Java</strong>.</p>
-<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="comment">// Adding doubles</span>
-System.out.println(<span class="number">1.1</span> + <span class="number">2.2</span>);   <span class="comment">// 3.3000000000000003</span>
-
-<span class="comment">// Adding floats</span>
-System.out.println(<span class="number">1.1</span>f + <span class="number">2.2</span>f); <span class="comment">// 3.3000002</span>
-</pre></td></tr></table></figure>
-
-<p>So if you&#39;re doing these kinds of operations with <code>float</code> or <code>double</code> in Java you
-might be doing them wrong.</p>
-<p>This is huge because an application that deals with money is almost certain to
-have to deal with decimals. You have to get it right or you&#39;ll be in a lot of trouble.</p>
-<blockquote><p>People have a reasonable expectation that when you’re adding up their money
-you’re going to come up with the right result, and you don’t.</p>
-<footer><strong>Douglas Crockford</strong></footer></blockquote>
-
-<p><code>float</code> and <code>double</code> should never be used for currency or high precision operations.</p>
-<p>The proper way to do this is using the <code>BigDecimal</code> class. Check out the
-<a href="http://goo.gl/r78E1">documentation</a>.</p>
-<p>Let&#39;s try it again, this time using <code>BigDecimal</code>:</p>
-<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>BigDecimal num1 = <span class="keyword">new</span> BigDecimal(<span class="number">1.1</span>);
-BigDecimal num2 = <span class="keyword">new</span> BigDecimal(<span class="number">2.2</span>);
-System.out.println(num1.add(num2)); <span class="comment">// 3.30000000000000026645352591003756...etc.</span>
-</pre></td></tr></table></figure>
-
-<p>Oh noes! what happened? I thought <code>BigDecimal</code> was supposed to solve all my problems.</p>
-<p>Hold on, take another look at the code above. You&#39;ll notice we&#39;re constructing our
-<code>BigDecimal</code> objects using a... <em>drums</em>... <code>double</code>.</p>
-<p>So? Well, that&#39;s the deal with <code>float</code> and <code>double</code>, it&#39;s why they should not be
-used in these operations. They cannot accurately represent numbers with decimals.</p>
-<p>OK, how do we fix this? There&#39;s a constructor that takes a <code>String</code> argument
-(didn&#39;t you look at the documentation?). That&#39;s how we should always do it. Pass
-a <code>String</code> so you won&#39;t lose precision:</p>
-<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>BigDecimal num3 = <span class="keyword">new</span> BigDecimal(<span class="string">"1.1"</span>);
-BigDecimal num4 = <span class="keyword">new</span> BigDecimal(<span class="string">"2.2"</span>);
-System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
-</pre></td></tr></table></figure>
-
-<p>Perfect! now lawsuits won&#39;t be falling from the sky.</p>
-<p>Sources:</p>
-<p><a href="http://goo.gl/73HT9">Representing money</a></p>
-<p><a href="http://goo.gl/DE0Aw">Beware of floating point numbers</a></p>
+        <p>We all know that mathematical operations with decimals in JavaScript are no good.</p>
 
       
     </div>
@@ -148,7 +88,7 @@ System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
       
         
           <div class="alignleft">
-            <a href="/2011/why-your-java-math-might-be-wrong/#more" class="more-link">Read More</a>
+            <a href="/2011/why-your-java-math-might-be-wrong/" class="more-link">Read More</a>
           </div>
         
         
@@ -157,6 +97,7 @@ System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -229,6 +170,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

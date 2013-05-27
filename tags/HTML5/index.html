@@ -82,94 +82,6 @@
       
         <p>HTML5 introduces lots of new and exciting things for web authors, among these are new APIs.
 Here are some of them.</p>
-<h3><a href="http://dev.w3.org/html5/spec-author-view/spec.html#application-cache-api">Application Cache API</a></h3>
-<p>An API to interact with the application cache, which is a set of cached resources.</p>
-<p>You can do <code>window.applicationCache</code> to get the <code>ApplicationCache</code> object that applies to
-the active document of that window. More on application caches
-<a href="http://dev.w3.org/html5/spec/offline.html#appcache">here</a>.</p>
-<h3><a href="http://dev.w3.org/html5/spec-author-view/spec.html#datatransfer">DataTransfer API</a></h3>
-<p>The <code>DataTransfer</code> objects are used to expose the drag data store that underlies a
-drag-and-drop operation. More on drag and drop
-<a href="http://dev.w3.org/html5/spec-author-view/spec.html#dnd">here</a>.</p>
-<h3><a href="http://dev.w3.org/html5/spec-author-view/spec.html#command-api">Command API</a></h3>
-<p>A command is the abstraction behind menu items, buttons, and links. They are defined
-to have facets (label, hint, icon, etc.) and are exposed on elements using this API.</p>
-<h3><a href="http://dev.w3.org/html5/spec-author-view/spec.html#the-constraint-validation-api">Constraint Validation API</a></h3>
-<p>As of this writing, there is no proper definition to this. But we can assume it&#39;ll
-extend our client-side validation tool arsenal.</p>
-<h3><a href="http://dev.w3.org/html5/spec-author-view/spec.html#history-0">History API</a></h3>
-<p>The <code>History</code> objects provide a representation of the pages in the session history
-of browsing contexts.</p>
-<p>For example, you can go back (<code>window.history.back</code>) and forward (<code>window.history.forward</code>).
-More on session history <a href="http://dev.w3.org/html5/spec-author-view/spec.html#history">here</a>.</p>
-<h3><a href="http://dev.w3.org/html5/spec-author-view/spec.html#media-controllers">MediaController API</a></h3>
-<p>An API to interact with the <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> elements.</p>
-<p>You can do things like play (<code>controller.play</code>) and pause (<code>controller.pause</code>).
-More on media elements
-<a href="http://dev.w3.org/html5/spec-author-view/spec.html#media-element">here</a>.</p>
-<h3><a href="http://dev.w3.org/html5/spec-author-view/spec.html#text-track-api">Text Track API</a></h3>
-<p>An API to interact with the <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> associated text tracks,
-like subtitles or captions.</p>
-<p>You can get a <code>media</code> element and get a track from it like <code>media.textTracks[0]</code>
-(for the first one).</p>
-<p>A <code>textTrack</code> element has it&#39;s own API which can return things like the language,
-readyState, mode, etc. More on media elements
-<a href="http://dev.w3.org/html5/spec-author-view/spec.html#media-element">here</a>.</p>
-<h3><a href="http://dev.w3.org/html5/spec-author-view/spec.html#textFieldSelection">APIs for the text field selections</a></h3>
-<p>The <code>input</code> and <code>textarea</code> text elements define an API for handling their selection.</p>
-<p>You can select everything in a text field with the <code>select</code> function, or use
-<code>selectionStart</code> and <code>selectionEnd</code> to get the currently selected text.</p>
-<p>By the way, this is not it. There are, of course, other interfaces and current
-elements that are being extended with new properties and functions.</p>
-<h2>Related specifications</h2>
-<p>Now I present to you:</p>
-<ul>
-<li>Specs that were originally in the HTML5 spec, but were later moved out into their own.</li>
-<li>Specs worked on by the Web Apps Working Group (in charge of HTML5).</li>
-<li>Other related/interesting specs.</li>
-</ul>
-<h3><a href="http://dev.w3.org/html5/2dcontext">Canvas 2D Context</a></h3>
-<p>Defines the 2D Context for the HTML <code>&lt;canvas&gt;</code> element.</p>
-<h3><a href="http://dev.w3.org/2006/webapi/clipops/clipops.html">Clipboard API and events</a></h3>
-<p>Describes APIs for clipboard operations such as copy, cut and paste in web applications.</p>
-<h3><a href="http://dvcs.w3.org/hg/editing/raw-file/tip/editing.html">Editing APIs</a></h3>
-<p>Defines commands to edit HTML documents programmatically.</p>
-<h3><a href="http://dev.w3.org/2006/webapi/FileAPI">File API</a></h3>
-<p>This specification provides an API for representing file objects in web applications,
-as well as programmatically selecting them and accessing their data.</p>
-<h3><a href="http://dev.w3.org/2009/dap/file-system/file-dir-sys.html">File API: Directories and System</a></h3>
-<p>This specification defines an API to navigate file system hierarchies.</p>
-<h3><a href="http://dev.w3.org/2009/dap/file-system/file-writer.html">File API: Writer</a></h3>
-<p>This specification defines an API for writing to files from web applications.</p>
-<h3><a href="http://dev.w3.org/html5/postmsg">HTML5 Web Messaging</a></h3>
-<p>Defines two mechanisms for communicating between browsing contexts in HTML documents.</p>
-<h3><a href="http://dvcs.w3.org/hg/IndexedDB/raw-file/tip/Overview.html">Indexed Database API</a></h3>
-<p>Formerly WebSimpleDB API, this document defines APIs for a database of records
-holding simple values and hierarchical objects.</p>
-<h3><a href="http://dev.w3.org/html5/eventsource">Server-Sent Events</a></h3>
-<p>This specification defines an API for opening an HTTP connection for receiving
-push notifications from a server in the form of DOM events.</p>
-<h3><a href="http://dev.w3.org/html5/websockets">The Web Sockets API</a></h3>
-<p>This specification defines an API that enables Web pages to use the WebSocket
-protocol for two-way communication with a remote host.</p>
-<h3><a href="http://dev.w3.org/html5/webstorage">Web Storage</a></h3>
-<p>This specification defines an API for persistent data storage of key-value pair
-data in Web clients.</p>
-<h3><a href="http://dev.w3.org/html5/workers">Web Workers</a></h3>
-<p>This specification defines an API that allows Web application authors to spawn
-background workers running scripts in parallel to their main page. This allows
-for thread-like operation with message-passing as the coordination mechanism.</p>
-<h3><a href="http://dev.w3.org/2006/webapi/XMLHttpRequest-2">XMLHttpRequest Level 2</a></h3>
-<p>Enhances the <code>XMLHttpRequest</code> object with new features, such as cross-origin
-requests, progress events, and the handling of byte streams for both sending and
-receiving.</p>
-<p>And, again, these are not it. There are other working groups in the W3C besides
-the Web Apps one, each one with specifications they&#39;re working on. It&#39;s crazy,
-I know, but hopefully this will give you an idea of what&#39;s coming. I strongly
-recommend you to research more about it and experiment.</p>
-<p>Sources:</p>
-<p><a href="http://goo.gl/lxtGi">HTML5: Edition for Web Authors (editor&#39;s draft)</a></p>
-<p><a href="http://goo.gl/VGjgi">WebApps Working Group Publication Status of specifications</a></p>
 
       
     </div>
@@ -177,7 +89,7 @@ recommend you to research more about it and experiment.</p>
       
         
           <div class="alignleft">
-            <a href="/2011/html5-apis/#more" class="more-link">Read More</a>
+            <a href="/2011/html5-apis/" class="more-link">Read More</a>
           </div>
         
         
@@ -186,6 +98,7 @@ recommend you to research more about it and experiment.</p>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -258,6 +171,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

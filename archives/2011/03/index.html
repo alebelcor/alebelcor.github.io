@@ -90,186 +90,6 @@ always dealt with arrays in our JavaScript:</p>
 myLinks.length; <span class="comment">// "3"</span>
 </pre></td></tr></table></figure>
 
-<p>We later found out that the things we thought were arrays, were instead
-array-like objects. But how exactly are they like arrays? Those &quot;array-like&quot;
-objects/elements/things, most of the time, are either HTMLCollections or
-NodeLists, not native JavaScript array objects. Take a look at what the
-specification says of them, the keyword is live:</p>
-<blockquote><p>An HTMLCollection is a list of nodes. Collections in the HTML DOM are assumed
-to be live meaning that they are automatically updated when the underlying</p>
-<footer><strong>DOM Level 1</strong><cite><a href="http://www.w3.org/TR/REC-DOM-Level-1/level-one-html.html#ID-75708506">www.w3.org/TR/REC-DOM-Level-1/&hellip;</a></cite></footer></blockquote>
-<blockquote><p>The NodeList interface provides the abstraction of an ordered collection of
-nodes, without defining or constraining how this collection is implemented.
-odeList objects in the DOM are live.</p>
-<footer><strong>DOM Level 3</strong><cite><a href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/DOM3-Core.html#core-ID-536297177">www.w3.org/TR/2004/&hellip;</a></cite></footer></blockquote>
-
-<p>But what does that mean? It means that live collections, if modified, are
-updated as the program runs. For example, this is an infinte loop:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="keyword">var</span> myLinks = document.getElementsByTagName(<span class="string">'a'</span>), <span class="comment">// we have three links</span>
-    i,
-    j;
-
-<span class="keyword">for</span> (i = <span class="number">0</span>, j = myLinks.length; i &lt; j; i += <span class="number">1</span> ) {
-    document.body.appendChild(document.createElement(<span class="string">'a'</span>));
-}
-</pre></td></tr></table></figure>
-
-<p>We&#39;re getting our collection (of three links) and then for each link that we
-have, we&#39;re going to append another link to the body. So why is this infinite?
-Because the collection is live, which means that not only will <code>i</code> increment,
-<code>j</code> also will, so naturally the loop will keep going.</p>
-<p>So why are they called array-like objects? If it looks like an array and acts
-like an array, then it must be an array, right? Wrong, DOM collections look
-like arrays because:</p>
-<ul>
-<li>They have an associated index to each value in the container. But that&#39;s
-something an object can have too:</li>
-</ul>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="keyword">var</span> myObj = {
-    <span class="number">0</span>: <span class="string">'zero'</span>,
-    <span class="number">1</span>: <span class="string">'one'</span>,
-    <span class="number">2</span>: <span class="string">'two'</span>,
-    <span class="number">3</span>: <span class="string">'three'</span>
-};
-
-alert(myObj[<span class="number">0</span>]); <span class="comment">// 'zero'</span>
-alert(myObj[<span class="number">3</span>]); <span class="comment">// 'three'</span>
-</pre></td></tr></table></figure>
-
-<p>The <code>alert</code> statements might look like they want the elements with index <code>0</code>
-and <code>3</code> but you&#39;re really getting the value from the property named <code>0</code> and <code>3</code>.</p>
-<ul>
-<li>They have a <code>length</code> property. This is deceptive because arrays have this same
-property, but so do HTMLCollections and NodeLists. But, because these are not
-true arrays they do not have <code>push</code>, <code>concat</code>, <code>splice</code>or any of the other array
-methods.</li>
-</ul>
-<p>Be prepared, these are some of the DOM methods (that I know of) that return an
-HTMLCollection or NodeList:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-</pre></td><td class="code"><pre><span class="comment">// DOM Level 1/HTML 4.0</span>
-<span class="comment">// ---------------------------</span>
-<span class="comment">// Return an HTMLCollection</span>
-document.anchors
-document.applets
-document.forms
-document.images
-document.links
-
-document.getElementsByName
-
-formElement.elements
-selectElement.options
-tableElement.rows
-tableElement.tBodies
-tableRowElement.cells
-
-<span class="comment">// Not part of any standard</span>
-document.embeds
-document.plugins
-
-<span class="comment">// DOM Level 2</span>
-<span class="comment">// ------------------</span>
-<span class="comment">// Return a NodeList</span>
-Node.childNodes
-
-document.getElementsByName
-document.getElementsByTagName
-document.getElementsByTagNameNS
-document.getElementsByName
-
-element.getElementsByTagName
-element.getElementsByTagNameNS
-
-<span class="comment">// WHATWG Web Applications 1.0</span>
-<span class="comment">// ---------------------------</span>
-<span class="comment">// Return a NodeList</span>
-document.getElementsByClassName
-element.getElementsByClassName
-</pre></td></tr></table></figure>
-
-<p>Throughout this post I&#39;ve been talking about <code>NodeLists</code> as such and not as live
-<code>NodeLists</code> because they are inherintely live. There&#39;s an exception to this,
-there are <em>static</em> <code>NodeLists</code> that act as snapshots and do not update when the
-document is modified:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="comment">// Selectors API Level 1</span>
-<span class="comment">// ---------------------</span>
-<span class="comment">// Return a static NodeList</span>
-document.querySelectorAll
-element.querySelectorAll
-</pre></td></tr></table></figure>
-
-<p>In conclusion, I think it&#39;s important to know the differences between a live DOM
-collection a true JavaScript array, it&#39;s also an important thing to be aware of
-because you&#39;ll eventually interact with these.</p>
-<p>I know so far I&#39;ve been talking mostly about the DOM (sorry, this wasn&#39;t the
-exception) but you cannot say that this was a boring topic, or was it?</p>
-<p>Sources:</p>
-<p><a href="http://goo.gl/Rsjsz">Why is getElementsByTagName() faster than querySelectAll()?</a></p>
-<p><a href="http://goo.gl/1j5SA">Speed Up Your JavaScript (video)</a></p>
-<p><a href="http://goo.gl/EsmN4">HTMLCollection - MDN Doc Center, NodeList - MDN Doc Center</a></p>
-<p><a href="http://goo.gl/PN66P">DOM Level 1 Specification</a></p>
-<p><a href="http://goo.gl/jDqpo">DOM Level 2 Specification</a></p>
-<p><a href="http://goo.gl/K6p1j">DOM Level 3 Specification</a></p>
 
       
     </div>
@@ -277,7 +97,7 @@ exception) but you cannot say that this was a boring topic, or was it?</p>
       
         
           <div class="alignleft">
-            <a href="/2011/htmlcollections-nodelists/#more" class="more-link">Read More</a>
+            <a href="/2011/htmlcollections-nodelists/" class="more-link">Read More</a>
           </div>
         
         
@@ -286,6 +106,7 @@ exception) but you cannot say that this was a boring topic, or was it?</p>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -311,69 +132,6 @@ exception) but you cannot say that this was a boring topic, or was it?</p>
       
         <p><code>innerHTML</code> is a read/write property of a DOM element that gets/sets the HTML
 contained in the element.</p>
-<h2>It&#39;s fast</h2>
-<p>This might vary between browsers but, it&#39;s almost a fact that creating and
-inserting elements using <code>innerHTML</code> instead of DOM methods is faster, not only
-at execution time, it&#39;ll also make the script size lighter because less code is
-needed.</p>
-<h2>It&#39;s clean &amp; readable</h2>
-<p>Although the name, <code>innerHTML</code>, might seem confusing at first, it comes as the
-better choice in terms of code readability because DOM methods are very verbose
-and can consume a lot of lines of code.</p>
-<h2>It&#39;s supported</h2>
-<p>It was first introduced by Microsoft as proprietary to IE and there&#39;s no spec
-that defines the behavior of <code>innerHTML</code> but it has been adopted by all major
-browsers because of its usefulness and it pretty much works the same in all of
-them.</p>
-<p>Creating and inserting using DOM methods:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="keyword">var</span> newDiv = document.createElement(<span class="string">'div'</span>);
-
-newDiv.setAttribute(<span class="string">'id'</span>, <span class="string">'new-div'</span>);
-newDiv.setAttribute(<span class="string">'class'</span>, <span class="string">'big-div'</span>);
-
-<span class="keyword">var</span> text = document.createTextNode(<span class="string">'Some text here'</span>);
-newDiv.appendChild(text);
-
-document.body.appendChild(newDiv); <span class="comment">// div is inserted in the tree</span>
-</pre></td></tr></table></figure>
-
-<p>Creating and inserting using innerHTML:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="keyword">var</span> newDiv = <span class="string">'&lt;div id="new-div" class="big-div"&gt;Some text here&lt;/div&gt;'</span>;
-
-document.body.innerHTML = newDiv; <span class="comment">// div is inserted in the tree&lt;/pre&gt;</span>
-</pre></td></tr></table></figure>
-
-
-<h2>Reasons not to use it</h2>
-<ul>
-<li>Not standard. Although it&#39;s fast and it works, the bottom line is that it is
-not part of any W3C or DOM standard. However, there are plans of adding it to
-the HTML5 specification.</li>
-<li>XSS unsafe. You have to know when to use it, otherwise you are exposing your
-application to XSS attacks, choose DOM methods until you&#39;re familiar with the
-subject.</li>
-<li>Not implemented everywhere. There are some table related elements, in IE,
-that can&#39;t be modified with it. The implementation and behavior might vary from
-browser to browser.</li>
-<li>Destroys the children. Setting a value to <code>innerHTML</code> will destroy every
-descendant to that element, if any of those descendants had event handlers,
-that could potentially create a memory leak in some browsers.</li>
-</ul>
-<p>Sources:</p>
-<p><a href="http://goo.gl/PKHtg">innerHTML (Mozilla Developer Network)</a></p>
-<p><a href="http://goo.gl/UUyIw">innerHTML (Microsoft Developer Network)</a></p>
 
       
     </div>
@@ -381,7 +139,7 @@ that could potentially create a memory leak in some browsers.</li>
       
         
           <div class="alignleft">
-            <a href="/2011/using-innerhtml/#more" class="more-link">Read More</a>
+            <a href="/2011/using-innerhtml/" class="more-link">Read More</a>
           </div>
         
         
@@ -390,6 +148,7 @@ that could potentially create a memory leak in some browsers.</li>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -462,6 +221,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

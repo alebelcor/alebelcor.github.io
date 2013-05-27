@@ -76,6 +76,7 @@
     <div class="entry">
       
         
+          
   <div class="addthis addthis_toolbox addthis_default_style">
     
       <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -91,8 +92,11 @@
   <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51a2a190502ebfe9"></script>
 
 
+        
         <h2>What does <code>this</code> mean?</h2>
 <p>Short answer, it depends.</p>
+<a name="more"></a>
+
 <p>In general terms, you could say that the <code>this</code> keyword, in JavaScript, refers to
 the function&#39;s context, how it&#39;s invoked. There are four ways in which a function
 can be invoked: method form, function form, constructor form and apply form.</p>
@@ -251,6 +255,14 @@ sayWelcome.call(myObj2, <span class="string">'Toronto'</span>);  <span class="co
 </article>
 
 
+<section id="comment">
+  <h1 class="title">Comments</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
@@ -313,6 +325,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

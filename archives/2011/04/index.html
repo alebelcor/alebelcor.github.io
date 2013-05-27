@@ -81,117 +81,6 @@
     <div class="entry">
       
         <p>Do you want to know how the trim method works in jQuery? Today is lucky day.</p>
-<p>Here&#39;s the code from the jQuery 1.5.2 source, I separated distant lines of code
-with three dots:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-</pre></td><td class="code"><pre>...
-<span class="comment">// Check if a string has a non-whitespace character in it</span>
-rnotwhite = <span class="regexp">/\S/</span>,
-
-<span class="comment">// Used for trimming whitespace</span>
-trimLeft = <span class="regexp">/^\s+/</span>,
-trimRight = <span class="regexp">/\s+$/</span>,
-...
-<span class="comment">// Save a reference to some core methods</span>
-...
-trim = String.prototype.trim,
-...
-<span class="comment">// Use native String.trim function wherever possible</span>
-trim: trim ?
-    <span class="keyword">function</span>( text ) {
-        <span class="keyword">return</span> text == <span class="literal">null</span> ?
-            <span class="string">""</span> :
-            trim.call( text );
-    } :
-
-    <span class="comment">// Otherwise use our own trimming functionality</span>
-    <span class="keyword">function</span>( text ) {
-        <span class="keyword">return</span> text == <span class="literal">null</span> ?
-            <span class="string">""</span> :
-            text.toString().replace( trimLeft, <span class="string">""</span> ).replace( trimRight, <span class="string">""</span> );
-    },
-...
-<span class="comment">// IE doesn't match non-breaking spaces with \s</span>
-<span class="keyword">if</span> ( rnotwhite.test( <span class="string">"\xA0"</span> ) ) {
-    trimLeft = <span class="regexp">/^[\s\xA0]+/</span>;
-    trimRight = <span class="regexp">/[\s\xA0]+$/</span>;
-}
-...
-</pre></td></tr></table></figure>
-
-<p>Line 14 is where the ternary action to determine how <code>jQuery.trim</code> will behave
-begins, all the way through line 26. Another way to look at it is this:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>trim: trim ?
-    <span class="keyword">function</span>( text ) {
-        <span class="comment">// native trimming</span>
-    } :
-    <span class="keyword">function</span>( text ) {
-        <span class="comment">// jQuery trimming</span>
-    },
-</pre></td></tr></table></figure>
-
-<p>You might find <code>trim: trim</code> hard to understand, but not when you look at the
-<code>trim</code> variable in line 11. Notice how jQuery stores an internal reference to
-the native <code>trim</code> method of strings. So, if we have native support for trimming,
-i.e. checking for truthy value in the <code>trim</code> variable, we go ahead and do it
-that way but not before checking for <code>null</code> or <code>undefined</code>.</p>
-<p>If the browser doesn&#39;t have support, we&#39;ll check if the passed string is not
-<code>null</code> or <code>undefined</code>, if it is, we&#39;ll return a blank string (just like in the
-first case), otherwise we&#39;ll trim it. Let&#39;s see how.</p>
-<p>We&#39;re calling the <code>toString</code> method on the passed string to, and this is a total
-guess, make sure we have a string to work with before attempting any operation.</p>
-<p>Then we&#39;ll trim the left side of the string and after that the right side. The
-regular expressions for those (in lines 6 &amp; 7) match, pretty much, every type of
-space you wouldn&#39;t want in your string. So, we make sure that the passed string
-doesn&#39;t have those, and if it does, we get rid of them by replacing them with a
-blank string.</p>
-<p>We&#39;re just missing lines 2-3 and 28-32. <code>rnotwhite</code> matches a single character
-other than white space and lines 28-32 check if we should be checking for
-non-breaking spaces (<code>A0</code> in hexadecimal) in our trimming, mostly because of IE
-like the comment says. If so, we need to redefine our <code>trimLeft</code> and <code>trimRight</code>
-to include matching the non-breaking space character.</p>
-<p>Sources:</p>
-<p><a href="http://goo.gl/ycx2j">jQuery 1.5.2 source code</a></p>
-<p><a href="http://goo.gl/kD5JA">jQuery API - jQuery.trim</a></p>
 
       
     </div>
@@ -199,7 +88,7 @@ to include matching the non-breaking space character.</p>
       
         
           <div class="alignleft">
-            <a href="/2011/jquery-trim/#more" class="more-link">Read More</a>
+            <a href="/2011/jquery-trim/" class="more-link">Read More</a>
           </div>
         
         
@@ -208,6 +97,7 @@ to include matching the non-breaking space character.</p>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -235,87 +125,6 @@ to include matching the non-breaking space character.</p>
 Things I Learned from the jQuery Source&quot; and this time I was quite amazed when
 Paul Irish talked about <code>parseJSON</code>. And the reason was the way jQuery makes the
 JSON object, it&#39;s clever, it&#39;s very clever.</p>
-<p>Let me show you. Here&#39;s jQuery&#39;s 1.5.2 <code>parseJSON</code> method:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-</pre></td><td class="code"><pre>parseJSON: <span class="keyword">function</span>( data ) {
-    <span class="keyword">if</span> ( <span class="keyword">typeof</span> data !== <span class="string">"string"</span> || !data ) {
-        <span class="keyword">return</span> <span class="literal">null</span>;
-    }
-
-    <span class="comment">// Make sure leading/trailing whitespace is removed (IE can't handle it)</span>
-    data = jQuery.trim( data );
-
-    <span class="comment">// Make sure the incoming data is actual JSON</span>
-    <span class="comment">// Logic borrowed from http://json.org/json2.js</span>
-    <span class="keyword">if</span> ( rvalidchars.test(data.replace(rvalidescape, <span class="string">"@"</span>)
-        .replace(rvalidtokens, <span class="string">"]"</span>)
-        .replace(rvalidbraces, <span class="string">""</span>)) ) {
-
-        <span class="comment">// Try to use the native JSON parser first</span>
-        <span class="keyword">return</span> window.JSON && window.JSON.parse ?
-            window.JSON.parse( data ) :
-            (<span class="keyword">new</span> Function(<span class="string">"return "</span> + data))();
-
-    } <span class="keyword">else</span> {
-        jQuery.error( <span class="string">"Invalid JSON: "</span> + data );
-    }
-},
-</pre></td></tr></table></figure>
-
-<p>Let&#39;s dissect that:</p>
-<ul>
-<li>Lines 2-4 are just checking you pass a string and its not empty.</li>
-<li>Line 7 explains itself.</li>
-<li>Lines 11-13 is a regular expression evaluation to make sure we have valid JSON.</li>
-</ul>
-<p>The interesting part, in this case, is the return statement:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="keyword">return</span> window.JSON && window.JSON.parse ?
-    window.JSON.parse( data ) :
-    (<span class="keyword">new</span> Function(<span class="string">"return "</span> + data))();
-</pre></td></tr></table></figure>
-
-<p>If the browser has native JSON support, use that. If not, and this is the
-interesting part, we&#39;ll do <code>(new Function(&quot;return &quot; + data))()</code>.</p>
-<p>But what does that mean? I&#39;m glad you asked.</p>
-<ul>
-<li>We&#39;re calling the <code>Function</code> constructor, which will return a <code>Function</code>
-object (function reference) and immediately invoke it.</li>
-<li>The <code>Function</code> constructor takes an &quot;n&quot; number of arguments that will become
-the function&#39;s parameters, being the last one the body of the function. We&#39;re
-passing only one parameter, meaning <code>&quot;return &quot; + data</code> will become the
-function&#39;s body.</li>
-<li>What does the constructed function do then? Considering <code>data</code> is a JSON
-string it becomes rather obvious now. It returns a JavaScript object. See? I
-told you it was clever, no need for <code>eval</code> this way.</li>
-</ul>
-<p>Sources:</p>
-<p><a href="http://goo.gl/NiNm6">11 More Things I Learned From The jQuery Source</a></p>
-<p><a href="http://goo.gl/PfwKh">Function - MDN</a></p>
 
       
     </div>
@@ -323,7 +132,7 @@ told you it was clever, no need for <code>eval</code> this way.</li>
       
         
           <div class="alignleft">
-            <a href="/2011/jquery-parsejson/#more" class="more-link">Read More</a>
+            <a href="/2011/jquery-parsejson/" class="more-link">Read More</a>
           </div>
         
         
@@ -332,6 +141,7 @@ told you it was clever, no need for <code>eval</code> this way.</li>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -363,50 +173,6 @@ their peers/superiors/underlings.</li>
 is someone who is probably having a bad day or a bad moment. Certified assholes
 are persistently nasty and destructive jerks.</li>
 </ul>
-<h2>Why are they dangerous?</h2>
-<ul>
-<li>Remember how they can damage people? well, at times that includes clients and
-customers.</li>
-<li>They undermine organizational performance.</li>
-<li>Asshole poisoning is a contagious disease that anyone can catch. Once you
-unleash disdain, anger and contempt or someone else unleashes it on you, it
-spreads like wildfire.</li>
-</ul>
-<h2>What should you care?</h2>
-<ul>
-<li>The total costs of assholes are HIGH. From loss of motivation, higher stress
-and turnover to legal and HR management costs like inside and outside counsel.</li>
-<li>If you sap the energy out of people, you may be sucking the life out of your
-career.</li>
-<li>When people feel mistreated and dissatisfied with their jobs, they are
-unwilling to do extra work to help their organization.</li>
-<li>Writing, displaying and repeating words about treating people with respect,
-but allowing or encouraging the opposite behavior, is worse than useless.
-The organization and its leaders are seen as hypocrites, which fuels cynicism
-and scorn.</li>
-<li>Organizations that drive in compassion and drive out fear attract superior
-talent, share ideas more freely, have less dysfunctional internal competition,
-and trump the external competition.</li>
-</ul>
-<h2>What should you do?</h2>
-<ul>
-<li>Adopt The No Asshole Rule.</li>
-<li>Have yourself tested.</li>
-<li>Get rid of assholes fast.</li>
-<li>Treat certified assholes as incompetent employees.</li>
-<li>Model and teach constructive confrontation.</li>
-<li>Improve your hiring process. Recruiters tend to hire candidates who look and
-act like his or her favorite person on the planet- him or herself. Assholes will
-hire assholes.</li>
-<li>Be like Google. Like Google, not &quot;be&quot; Google. They have a &quot;Don&#39;t be evil&quot;
-motto. The company works to screen them out in  hiring, and nasty people suffer
-during performance evaluations and  aren&#39;t promoted to management positions.</li>
-</ul>
-<p>&quot;The No Asshole Rule&quot;, by Robert I. Sutton, is a must-read for anyone looking to
-make a difference in their workplace. It is a very entertaining book and quite
-a learning experience.</p>
-<p><em>This post contains information found in:</em></p>
-<p><a href="http://goo.gl/TZP6J">The No Asshole Rule: Building a Civilized Workplace and Surviving One That Isn&#39;t</a></p>
 
       
     </div>
@@ -414,7 +180,7 @@ a learning experience.</p>
       
         
           <div class="alignleft">
-            <a href="/2011/beware-of-assholes/#more" class="more-link">Read More</a>
+            <a href="/2011/beware-of-assholes/" class="more-link">Read More</a>
           </div>
         
         
@@ -423,6 +189,7 @@ a learning experience.</p>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -495,6 +262,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

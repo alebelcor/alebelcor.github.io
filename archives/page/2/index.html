@@ -67,462 +67,6 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2011-09-11T08:31:00.000Z">
-          Sep 11th, 2011
-        </time>
-      
-      
-  
-    <h1 class="title"><a href="/2011/css-selectors/">CSS Selectors</a></h1>
-  
-
-
-    </header>
-    <div class="entry">
-      
-        <p>Have you ever wondered:</p>
-<ul>
-<li>How many selectors does CSS have?</li>
-<li>Which selectors come from which version of CSS?</li>
-<li>How does each selector work?</li>
-</ul>
-<p>Me too! so here&#39;s what I found out with an example for each one.</p>
-<h2>CSS 1</h2>
-<p><code>E</code> &rarr; an element of type E</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">div</span>
-
-<span class="comment">/* selects any div element in the document */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E F</code> &rarr; an F element descendant of an E element</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">div</span> <span class="tag">p</span>
-
-<span class="comment">/* selects any p element that is a descendant of a div element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E.warning</code> &rarr; an E element whose class is &quot;warning&quot;</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="class">.banner</span>
-
-<span class="comment">/* selects any element whose class is "banner" */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E#myid</code> &rarr; an E element with ID equal to &quot;myid&quot;.</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="id">#footer</span>
-
-<span class="comment">/* selects an element with ID equal to "footer" */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:link</code> &rarr; an E element being the source anchor of a hyperlink of which the
-target is not yet visited</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">a</span><span class="pseudo">:link</span>
-
-<span class="comment">/* selects any unvisited a element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:visited</code> &rarr; an E element being the source anchor of a hyperlink of which
-the target is already visited</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">a</span><span class="pseudo">:visited</span>
-
-<span class="comment">/* selects any visited a element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:active</code> &rarr; an E element currently being selected</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">a</span><span class="pseudo">:active</span>
-
-<span class="comment">/* selects any a element currently being selected */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:first-line</code> &rarr; the first formatted line of an E element</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">p</span><span class="pseudo">:first-line</span>
-
-<span class="comment">/* selects the first formatted line of any p element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:first-letter</code> &rarr; the first formatted letter of an E element</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">p</span><span class="pseudo">:first-letter</span>
-
-<span class="comment">/* selects the first formatted letter for any p element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E, F</code> &rarr; an element of type E and an element of type F</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">label</span>, <span class="tag">span</span>
-
-<span class="comment">/* not really a selector, it's a way of grouping them */</span>
-</pre></td></tr></table></figure>
-
-<p>According to the CSS 1 spec: &quot;Anchor pseudo-classes have no effect on elements
-other than &#39;A&#39;&quot;.</p>
-<p>Also, CSS 1 and CSS 2.1 use a single colon to refer to the first-line
-pseudo-class (:first-line) but CSS 3 uses two colons (::first-line).</p>
-<h2>CSS 2.1</h2>
-<p>Includes all previous ones and adds these in:</p>
-<p><code>*</code> &rarr; any element</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>*
-
-<span class="comment">/* selects any element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E &gt; F</code> &rarr; an F element child of an E element</p>
-<figure class="highlight lang-csss"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="title">div</span> &gt; <span class="title">p</span>
-
-/* selects any p elements that are direct children of a div element */
-</pre></td></tr></table></figure>
-
-<p><code>E:first-child</code> &rarr; an E element, first child of its parent</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">p</span><span class="pseudo">:first-child</span>
-
-<span class="comment">/* selects a p element, the first child of its parent */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:hover</code> &rarr; an E element when it&#39;s hovered over</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">a</span><span class="pseudo">:hover</span>
-
-<span class="comment">/* selects any a element when it's hovered over */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:focus</code> &rarr; an E element while it has the focus</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">input</span><span class="pseudo">:focus</span>
-
-<span class="comment">/* selects any input element while it has the focus */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:lang(fr)</code> &rarr; an element of type E in language &quot;fr&quot;</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>*<span class="pseudo">:lang(fr)</span>
-
-<span class="comment">/* selects any element which language matches french*/</span>
-</pre></td></tr></table></figure>
-
-<p><code>E[foo]</code> &rarr; an E element with a &quot;foo&quot; attribute</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">img</span><span class="attr_selector">[title]</span>
-
-<span class="comment">/* selects any img element with a title attribute */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E + F</code> &rarr; an F element immediately preceded by an E element</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">div</span> + <span class="tag">span</span>
-
-<span class="comment">/* selects any span element immediately preceded by a sibling div element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E[foo=&quot;bar&quot;]</code> &rarr; an E element whose &quot;foo&quot; attribute value is exactly equal
-to &quot;bar&quot;</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">p</span><span class="attr_selector">[class="example"]</span>
-
-<span class="comment">/* selects any p element whose class attribute is exactly equal to "example" */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E[foo~=&quot;bar&quot;]</code> &rarr; an E element whose &quot;foo&quot; attribute value is a list of
-whitespace-separated values, one of which is exactly equal to &quot;bar&quot;</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="tag">a</span><span class="attr_selector">[title~="copyright"]</span>
-
-<span class="comment">/*
- * selects any a element whose title attribute value is a list of
- * whitespace-separated values, one of which is exactly equal to "copyright"
- */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E[foo|=&quot;en&quot;]</code> &rarr; an E element whose &quot;foo&quot; attribute has a hyphen-separated
-list of values beginning (from the left) with &quot;en&quot;</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>*<span class="attr_selector">[lang|="en"]</span>
-
-<span class="comment">/*
- * selects any element whose lang attribute has a hyphen-separated list of
- * values beginning (from the left) with "en"
- */</span>
-</pre></td></tr></table></figure>
-
-<h2>CSS 3</h2>
-<p>Includes all previous ones and adds these in:</p>
-<p><code>E[foo^=&quot;bar&quot;]</code> &rarr; an E element whose &quot;foo&quot; attribute value begins exactly
-with the string &quot;bar&quot;</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">object</span><span class="attr_selector">[type^="image/"]</span>
-
-<span class="comment">/* selects any object element whose type attribute value begins with "image/" */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E[foo$=&quot;bar&quot;]</code> &rarr; an E element whose &quot;foo&quot; attribute value ends exactly
-with the string &quot;bar&quot;</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">a</span><span class="attr_selector">[href$=".html"]</span>
-
-<span class="comment">/* selects any a element whose href attribute value ends with ".html" */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E[foo*=&quot;bar&quot;]</code> &rarr; an E element whose &quot;foo&quot; attribute value contains the
-substring &quot;bar&quot;</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="tag">p</span><span class="attr_selector">[title*="hello"]</span>
-
-<span class="comment">/*
- * selects any p element whose title attribute value contains
- * the substring "hello"
- */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:root</code> &rarr; an E element, root of the document</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="pseudo">:root</span>
-
-<span class="comment">/* selects the root of the document, i.e. the HTML element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:nth-child(n)</code> &rarr; an E element, the n-th child of its parent</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">tr</span><span class="pseudo">:nth-child(0n+3)</span>
-
-<span class="comment">/* selects any tr element that is the third child of its parent */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:nth-last-child(n)</code> &rarr; an E element, the n-th child of its parent,
-counting from the last one</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">tr</span><span class="pseudo">:nth-last-child(-n+2)</span>
-
-<span class="comment">/* selects any tr element that is one of the two last rows of an HTML table */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:nth-of-type(n)</code> &rarr; an E element, the n-th sibling of its type</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">p</span><span class="pseudo">:nth-of-type(odd)</span>
-
-<span class="comment">/* selects any p element with odd position */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:nth-last-of-type(n)</code> &rarr; an E element, the n-th sibling of its type,
-counting from the last one</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">p</span><span class="pseudo">:nth-of-type(even)</span>
-
-<span class="comment">/* selects any p element with even position, starting from the last */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:last-child</code> &rarr; an E element, last child of its parent</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">ol</span> &<span class="tag">gt</span>; <span class="tag">li</span><span class="pseudo">:last-child</span>
-
-<span class="comment">/* selects any li element which is a last child of an ol element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:first-of-type</code> &rarr; an E element, first sibling of its type</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">dt</span><span class="pseudo">:first-of-type</span>
-
-<span class="comment">/* selects any dt element that is the first sibling of its type */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:last-of-type</code> &rarr; an E element, last sibling of its type</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">td</span><span class="pseudo">:last-of-type</span>
-
-<span class="comment">/* selects any td element that is the last sibling of its type */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:only-child</code> &rarr; an E element, only child of its parent</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">tr</span><span class="pseudo">:only-child</span>
-
-<span class="comment">/* selects any tr element that is an only child */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:only-of-type</code> &rarr; an E element, only sibling of its type</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">p</span><span class="pseudo">:only-of-type</span>
-
-<span class="comment">/* selects any p element which is the only of its type in a parent */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:empty</code> &rarr; an E element that has no children (including text nodes)</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">div</span><span class="pseudo">:empty</span>
-
-<span class="comment">/* selects any empty div element */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:target</code> &rarr; an E element being the target of the referring URI</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">p</span><span class="pseudo">:target</span>
-
-<span class="comment">/* selects any p element that is the target element of the referring URI */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:enabled</code> &rarr; a user interface element E which is enabled</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">input</span><span class="pseudo">:enabled</span>
-
-<span class="comment">/* selects any input element that is in a enabled state */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:disabled</code> &rarr; a user interface element E which is disabled</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">input</span><span class="pseudo">:disabled</span>
-
-<span class="comment">/* selects any input element that is in a disabled state */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:checked</code> &rarr; a user interface element E which is checked</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">input</span><span class="pseudo">:checked</span>
-
-<span class="comment">/* selects any input element that is selected or is toggled "on" */</span>
-</pre></td></tr></table></figure>
-
-<p><code>E:not(s)</code> &rarr; an E element that does not match simple selector s</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">button</span><span class="pseudo">:not(</span><span class="attr_selector">[disabled]</span>)
-
-<span class="comment">/* selects all button elements that are not disabled*/</span>
-</pre></td></tr></table></figure>
-
-<p><code>E ~ F</code> &rarr; an F element preceded by an E element</p>
-<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">div</span> ~ <span class="tag">p</span>
-
-<span class="comment">/* selects any p element that is a sibling to any div element */</span>
-</pre></td></tr></table></figure>
-
-<p>Sources:</p>
-<p><a href="http://goo.gl/ENpHk">Cascading Style Sheets, level 1</a></p>
-<p><a href="http://goo.gl/vNZaZ">Cascading Style Sheets Level 2 Revision 1 (CSS 2.1)</a></p>
-<p><a href="http://goo.gl/iPoQ7">Selectors Level 3</a></p>
-
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2011/css-selectors/#more" class="more-link">Read More</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-  
-    <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
         <time datetime="2011-08-13T04:01:00.000Z">
           Aug 12th, 2011
         </time>
@@ -538,110 +82,6 @@ counting from the last one</p>
       
         <p>In my last post I wrote about how to detect a JavaScript array, so I thought it
 would be a good idea to see how jQuery does it.</p>
-<p>Here&#39;s the <code>jQuery.isArray</code> method (in 1.6.2):</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>isArray: Array.isArray || <span class="keyword">function</span>( obj ) {
-    <span class="keyword">return</span> jQuery.type(obj) === <span class="string">"array"</span>;
-}
-</pre></td></tr></table></figure>
-
-<p>It uses the native <code>Array.isArray</code> method if it exists, if not it will find out
-the type of whatever is passed in using the <code>jQuery.type</code> method and see if that
-equals the string <code>&quot;array&quot;</code>.</p>
-<p>But come on, that&#39;s not much of a learning experience not to mention it makes for
-a pretty short blog post.</p>
-<p>So instead, I looked into the <code>jQuery.type</code> method to see how that works.</p>
-<h2><code>jQuery.type</code></h2>
-<p>It looks something like this:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td><td class="code"><pre><span class="comment">// Save a reference to some core methods</span>
-toString = Object.prototype.toString
-...
-<span class="comment">// [[Class]] -&gt; type pairs</span>
-class2type = {};
-...
-type: <span class="keyword">function</span>( obj ) {
-    <span class="keyword">return</span> obj == <span class="literal">null</span> ?
-        String( obj ) :
-        class2type[ toString.call(obj) ] || <span class="string">"object"</span>;
-}
-...
-<span class="comment">// Populate the class2type map</span>
-jQuery.each(
-    <span class="string">"Boolean Number String Function Array Date RegExp Object"</span>.split(<span class="string">" "</span>),
-    <span class="keyword">function</span>(i, name) {
-    class2type[ <span class="string">"[object "</span> + name + <span class="string">"]"</span> ] = name.toLowerCase();
-})
-</pre></td></tr></table></figure>
-
-<p>(Distant pieces of code are separated with three dots)</p>
-<h2>Breaking it down</h2>
-<ul>
-<li>Line 3 - A reference to the <code>toString</code> method of <code>Object</code>.</li>
-<li>Line 6 - An internal object (map) that will contain all types as strings.</li>
-<li>Line 15-19 - For each member in the array we&#39;re passing in, we&#39;ll create a
-property in the object and set its value to the name of the array member in lowercase.</li>
-<li>Line 8-12 - The method will check if the argument passed in is <code>null</code> or <code>undefined</code>,
-if so, it will return the string <code>&quot;null&quot;</code> or <code>&quot;undefined&quot;</code> (by calling the <code>String</code>
-constructor without the <code>new</code> keyword, which is allowed for some constructors).
-If it&#39;s something else, we&#39;ll call the <code>toString</code> method on the argument and look
-to see if the <code>class2type</code> object has a value for it, if not, we&#39;ll just return
-the string <code>&quot;object&quot;</code>.</li>
-</ul>
-<p>To give you a better overall picture, here&#39;s how the <code>class2type</code> object would
-look after page load:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre><span class="keyword">var</span> class2type = {
-    <span class="string">"[object Array]"</span>: <span class="string">"array"</span>,
-    <span class="string">"[object Boolean]"</span>: <span class="string">"boolean"</span>,
-    <span class="string">"[object Date]"</span>: <span class="string">"date"</span>,
-    <span class="string">"[object Function]"</span>: <span class="string">"function"</span>,
-    <span class="string">"[object Number]"</span>: <span class="string">"number"</span>,
-    <span class="string">"[object Object]"</span>: <span class="string">"object"</span>,
-    <span class="string">"[object RegExp]"</span>: <span class="string">"regexp"</span>,
-    <span class="string">"[object String]"</span>: <span class="string">"string"</span>
-};
-</pre></td></tr></table></figure>
-
-<h2>Epiphany</h2>
-<p>That&#39;s why we call the <code>toString</code> method of <code>Object</code> when we&#39;re looking for the
-property name. Remember how this method returns this sort of a <code>&quot;[object Constructor]&quot;</code>
-string pattern?</p>
-<p>So, if we did <code>jQuery.type(&quot;hello&quot;)</code> we&#39;d actually be doing something like
-<code>class2type[&quot;[object String]&quot;]</code>, which would return the corresponding value <code>&quot;string&quot;</code></p>
-<p>And that&#39;s how the <code>jQuery.type</code> method works.</p>
-<p>It&#39;s not that complicated when you have an &quot;Epiphany&quot; section, huh?</p>
-<p>Sources:</p>
-<p><a href="http://goo.gl/1T9yK">jQuery.type - jQuery API Documentation</a></p>
-<p><a href="http://goo.gl/MW8WI">jQuery 1.6.2 Source Code</a></p>
 
       
     </div>
@@ -649,7 +89,7 @@ string pattern?</p>
       
         
           <div class="alignleft">
-            <a href="/2011/jquery-type/#more" class="more-link">Read More</a>
+            <a href="/2011/jquery-type/" class="more-link">Read More</a>
           </div>
         
         
@@ -658,6 +98,7 @@ string pattern?</p>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -682,117 +123,6 @@ string pattern?</p>
     <div class="entry">
       
         <p>&quot;Piece of cake&quot; I bet you&#39;re thinking, oh I wish it were that easy.</p>
-<p>But fear not, JavaScript does have the <code>typeof</code> operator (returns a string) which
-is very useful for type-checking:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="keyword">var</span> str  = <span class="string">'hello'</span>,
-    num  = <span class="number">64</span>,
-    bool = <span class="literal">false</span>,
-    func = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>},
-    undef;
-
-<span class="keyword">typeof</span> str;   <span class="comment">// "string"</span>
-<span class="keyword">typeof</span> num;   <span class="comment">// "number"</span>
-<span class="keyword">typeof</span> bool;  <span class="comment">// "boolean"</span>
-<span class="keyword">typeof</span> func;  <span class="comment">// "function"</span>
-<span class="keyword">typeof</span> undef; <span class="comment">// "undefined"</span>
-</pre></td></tr></table></figure>
-
-<p>Like shown in the previous code, it works fine for most things. However, it&#39;s a little flawed:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="keyword">var</span> n   = <span class="literal">null</span>,
-    str = <span class="keyword">new</span> String(<span class="string">'hello'</span>), <span class="comment">// any wrapper function or custom constructor</span>
-    arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];
-
-<span class="keyword">typeof</span> n;   <span class="comment">// "object", which is wrong</span>
-<span class="keyword">typeof</span> str; <span class="comment">// "object", which is correct but not very useful.</span>
-<span class="keyword">typeof</span> arr; <span class="comment">// "object", which is correct but not very useful.</span>
-</pre></td></tr></table></figure>
-
-
-<h2><code>constructor</code> property</h2>
-<p>Every created object has a <code>constructor</code> property that points to the function
-that created the object&#39;s prototype. You can leverage that reference to do some
-accurate detections:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="code"><pre><span class="keyword">var</span> str    = <span class="keyword">new</span> String(<span class="string">'hello'</span>),
-    arr    = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],
-    Person = <span class="function"><span class="keyword">function</span> <span class="params">(name)</span> {</span>
-        <span class="keyword">this</span>.name = name;
-    },
-    obj;
-
-obj = <span class="keyword">new</span> Person(<span class="string">'John'</span>);
-
-obj.constructor === Person; <span class="comment">// true</span>
-str.constructor === String; <span class="comment">// true</span>
-arr.constructor === Array;  <span class="comment">// true</span>
-</pre></td></tr></table></figure>
-
-
-<h2><code>isArray</code> method</h2>
-<p>ECMAScript 5 defines a new method for the <code>Array</code> function called <code>isArray</code>.
-If it&#39;s not implemented by the browser you can define it like this:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="keyword">if</span> (!Array.hasOwnProperty(<span class="string">'isArray'</span>)) {
-    Array.isArray = <span class="function"><span class="keyword">function</span> <span class="params">(value)</span> {</span>
-        <span class="keyword">return</span> Object.prototype.toString.call(value) === <span class="string">'[object Array]'</span>;
-    };
-}
-</pre></td></tr></table></figure>
-
-<p>Invoking the <code>toString</code> method of <code>Object</code>, gets us a string representation of
-the object, for arrays it&#39;s <code>[object Array]</code>:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre><span class="keyword">var</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],
-    arr2 = <span class="keyword">new</span> Array(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);
-
-Array.isArray(arr1);             <span class="comment">// true</span>
-Array.isArray(arr2);             <span class="comment">// true</span>
-Array.isArray(<span class="keyword">new</span> Number(<span class="string">'12'</span>)); <span class="comment">// false</span>
-Array.isArray({});               <span class="comment">// false</span>
-</pre></td></tr></table></figure>
-
-<p>Sources:</p>
-<p><a href="http://goo.gl/qGNiS">typeof operator (MDC)</a></p>
-<p><a href="http://goo.gl/oOmxS">constructor property (MDC)</a></p>
 
       
     </div>
@@ -800,7 +130,7 @@ Array.isArray({});               <span class="comment">// false</span>
       
         
           <div class="alignleft">
-            <a href="/2011/how-to-detect-a-javascript-array/#more" class="more-link">Read More</a>
+            <a href="/2011/how-to-detect-a-javascript-array/" class="more-link">Read More</a>
           </div>
         
         
@@ -809,6 +139,90 @@ Array.isArray({});               <span class="comment">// false</span>
     </footer>
   </div>
 </article>
+
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-07-09T22:57:00.000Z">
+          Jul 9th, 2011
+        </time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/this-keyword-in-javascript/">The this keyword in JavaScript</a></h1>
+  
+
+
+    </header>
+    <div class="entry">
+      
+        <h2>What does <code>this</code> mean?</h2>
+<p>Short answer, it depends.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/this-keyword-in-javascript/" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-06-16T17:00:00.000Z">
+          Jun 16th, 2011
+        </time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/why-your-java-math-might-be-wrong/">Why your Java math might be wrong</a></h1>
+  
+
+
+    </header>
+    <div class="entry">
+      
+        <p>We all know that mathematical operations with decimals in JavaScript are no good.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/why-your-java-math-might-be-wrong/" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
 
 
 
@@ -885,6 +299,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 

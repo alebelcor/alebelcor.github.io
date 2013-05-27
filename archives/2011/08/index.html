@@ -82,110 +82,6 @@
       
         <p>In my last post I wrote about how to detect a JavaScript array, so I thought it
 would be a good idea to see how jQuery does it.</p>
-<p>Here&#39;s the <code>jQuery.isArray</code> method (in 1.6.2):</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre>isArray: Array.isArray || <span class="keyword">function</span>( obj ) {
-    <span class="keyword">return</span> jQuery.type(obj) === <span class="string">"array"</span>;
-}
-</pre></td></tr></table></figure>
-
-<p>It uses the native <code>Array.isArray</code> method if it exists, if not it will find out
-the type of whatever is passed in using the <code>jQuery.type</code> method and see if that
-equals the string <code>&quot;array&quot;</code>.</p>
-<p>But come on, that&#39;s not much of a learning experience not to mention it makes for
-a pretty short blog post.</p>
-<p>So instead, I looked into the <code>jQuery.type</code> method to see how that works.</p>
-<h2><code>jQuery.type</code></h2>
-<p>It looks something like this:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td><td class="code"><pre><span class="comment">// Save a reference to some core methods</span>
-toString = Object.prototype.toString
-...
-<span class="comment">// [[Class]] -&gt; type pairs</span>
-class2type = {};
-...
-type: <span class="keyword">function</span>( obj ) {
-    <span class="keyword">return</span> obj == <span class="literal">null</span> ?
-        String( obj ) :
-        class2type[ toString.call(obj) ] || <span class="string">"object"</span>;
-}
-...
-<span class="comment">// Populate the class2type map</span>
-jQuery.each(
-    <span class="string">"Boolean Number String Function Array Date RegExp Object"</span>.split(<span class="string">" "</span>),
-    <span class="keyword">function</span>(i, name) {
-    class2type[ <span class="string">"[object "</span> + name + <span class="string">"]"</span> ] = name.toLowerCase();
-})
-</pre></td></tr></table></figure>
-
-<p>(Distant pieces of code are separated with three dots)</p>
-<h2>Breaking it down</h2>
-<ul>
-<li>Line 3 - A reference to the <code>toString</code> method of <code>Object</code>.</li>
-<li>Line 6 - An internal object (map) that will contain all types as strings.</li>
-<li>Line 15-19 - For each member in the array we&#39;re passing in, we&#39;ll create a
-property in the object and set its value to the name of the array member in lowercase.</li>
-<li>Line 8-12 - The method will check if the argument passed in is <code>null</code> or <code>undefined</code>,
-if so, it will return the string <code>&quot;null&quot;</code> or <code>&quot;undefined&quot;</code> (by calling the <code>String</code>
-constructor without the <code>new</code> keyword, which is allowed for some constructors).
-If it&#39;s something else, we&#39;ll call the <code>toString</code> method on the argument and look
-to see if the <code>class2type</code> object has a value for it, if not, we&#39;ll just return
-the string <code>&quot;object&quot;</code>.</li>
-</ul>
-<p>To give you a better overall picture, here&#39;s how the <code>class2type</code> object would
-look after page load:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre><span class="keyword">var</span> class2type = {
-    <span class="string">"[object Array]"</span>: <span class="string">"array"</span>,
-    <span class="string">"[object Boolean]"</span>: <span class="string">"boolean"</span>,
-    <span class="string">"[object Date]"</span>: <span class="string">"date"</span>,
-    <span class="string">"[object Function]"</span>: <span class="string">"function"</span>,
-    <span class="string">"[object Number]"</span>: <span class="string">"number"</span>,
-    <span class="string">"[object Object]"</span>: <span class="string">"object"</span>,
-    <span class="string">"[object RegExp]"</span>: <span class="string">"regexp"</span>,
-    <span class="string">"[object String]"</span>: <span class="string">"string"</span>
-};
-</pre></td></tr></table></figure>
-
-<h2>Epiphany</h2>
-<p>That&#39;s why we call the <code>toString</code> method of <code>Object</code> when we&#39;re looking for the
-property name. Remember how this method returns this sort of a <code>&quot;[object Constructor]&quot;</code>
-string pattern?</p>
-<p>So, if we did <code>jQuery.type(&quot;hello&quot;)</code> we&#39;d actually be doing something like
-<code>class2type[&quot;[object String]&quot;]</code>, which would return the corresponding value <code>&quot;string&quot;</code></p>
-<p>And that&#39;s how the <code>jQuery.type</code> method works.</p>
-<p>It&#39;s not that complicated when you have an &quot;Epiphany&quot; section, huh?</p>
-<p>Sources:</p>
-<p><a href="http://goo.gl/1T9yK">jQuery.type - jQuery API Documentation</a></p>
-<p><a href="http://goo.gl/MW8WI">jQuery 1.6.2 Source Code</a></p>
 
       
     </div>
@@ -193,7 +89,7 @@ string pattern?</p>
       
         
           <div class="alignleft">
-            <a href="/2011/jquery-type/#more" class="more-link">Read More</a>
+            <a href="/2011/jquery-type/" class="more-link">Read More</a>
           </div>
         
         
@@ -202,6 +98,7 @@ string pattern?</p>
     </footer>
   </div>
 </article>
+
 
 
 
@@ -274,6 +171,18 @@ var moment_js_path = '/js/moment.min.js';
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 
+
+<script>
+var disqus_shortname = 'alebelcor-github-io';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
 
 
 
