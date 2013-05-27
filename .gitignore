@@ -1,0 +1,8 @@
+.deploy
+public
+node_modules
+
+db.json
+.DS_Store
+.stackdump
+.log
