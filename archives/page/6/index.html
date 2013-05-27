@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  
+  <title>Page 6 &mdash; Archives &mdash; Alejandro Beltrán</title>
+  <meta name="author" content="Alejandro Beltrán">
+  
+  <meta name="description" content="Blogging about Front End Development, Software and stuff">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <meta property="og:site_name" content="Alejandro Beltrán">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alejandro Beltrán" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.min.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+<script>
+  var _gaq=[['_setAccount','UA-39910763-1'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src='//www.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+</head>
+
+<body>
+  <header id="header" class="inner">
+    <div class="alignleft">
+  <h1><a href="/">Alejandro Beltrán</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+  </header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">Archives</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-02-28T18:30:00.000Z">
+          Feb 28th, 2011
+        </time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/manipulating-dom-elements-and-styles/">Manipulating DOM elements and styles</a></h1>
+  
+
+
+    </header>
+    <div class="entry">
+      
+        <h2>Manipulating elements</h2>
+<p>Once you have access to an element, you can manipulate it using assignment of
+object properties or DOM methods. Let&#39;s take a look at the examples:</p>
+<h3>HTML</h3>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&lt;img src="small-dog.png" id="img-dog"&gt;
+</pre></td></tr></table></figure>
+
+<h3>JavaScript</h3>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="keyword">var</span> myImage = document.getElementById(<span class="string">'img-dog'</span>);
+
+<span class="comment">// Object property</span>
+myImage.src = <span class="string">'big-dog.png'</span>;
+
+<span class="comment">// DOM method</span>
+myImage.setAttribute(<span class="string">'src'</span>, <span class="string">'big-dog.png'</span>);
+</pre></td></tr></table></figure>
+
+<p>In both examples we&#39;re changing the <code>src</code> of our image element. It&#39;s recommended
+to use the first example, it&#39;s easier, shorter, faster and works across browsers.
+If, for some reason, you can&#39;t use it, use the second one.
+Here&#39;s a link to <a href="http://goo.gl/HQo7a">quirksmode.org</a> with more information.</p>
+<h2>Style</h2>
+<p>You can also change an element&#39;s style dynamically . You can do so by changing
+the <code>className</code> property or applying a style directly into the <code>style</code> object.</p>
+<h3>HTML</h3>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&lt;span id="my-span"&gt;Some text here&lt;/span&gt;
+</pre></td></tr></table></figure>
+
+<h3>JavaScript</h3>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="keyword">var</span> mySpan = document.getElementById(<span class="string">'my-span'</span>);
+
+mySpan.className       = <span class="string">'big'</span>;    <span class="comment">// the CSS class 'big' makes the text big</span>
+mySpan.style.textAlign = <span class="string">'center'</span>; <span class="comment">// centers the text</span>
+</pre></td></tr></table></figure>
+
+<p>Both, <code>className</code> and <code>style</code>, are read/write. But, the style object will only
+reflect styles that are directly applied to the element (i.e. in the markup),
+not the ones from the cascade. To get those you need go a little bit further:</p>
+<h3>HTML</h3>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&lt;span id="my-span"&gt;Some text here&lt;/span&gt;
+</pre></td></tr></table></figure>
+
+<h3>CSS</h3>
+<figure class="highlight lang-css"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="id">#my-span</span> <span class="rules">{
+    <span class="rule"><span class="attribute">font-weight</span>:<span class="value"> bold;</span></span>
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h3>JavaScript</h3>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="keyword">var</span> mySpan = document.getElementById(<span class="string">'my-span'</span>);
+
+mySpan.style.fontWeight;              <span class="comment">// returns an empty string</span>
+mySpan.currentStyle[<span class="string">'fontWeight'</span>];    <span class="comment">// returns 'bold', works only in IE</span>
+window.getComputedStyle(mySpan)
+    .getPropertyValue(<span class="string">'font-weight'</span>); <span class="comment">// returns 'bold', doesn't work in IE</span>
+</pre></td></tr></table></figure>
+
+<p>As you can see:</p>
+<ul>
+<li>The CSS property on the <code>style</code> object didn&#39;t have anything and returned an
+empty string.</li>
+<li>IE&#39;s proprietary method is very nice and readable (you could also use the
+dot notation, e.g. <code>mySpan.currentStyle.fontWeight</code>).</li>
+<li>The standard way is very verbose and complicated but works on all standards
+compliant browsers. If you need to get styles individually I suggest creating a
+utility function to deal with the cross browser issues (an example from
+<a href="http://goo.gl/vlIir">quirksmode.org</a>).</li>
+</ul>
+<p>But in general, I recommend using CSS classes for dynamic styling. It is way
+easier and faster to add/modify/delete CSS classes. It&#39;s a style agnostic
+practice, in case you don&#39;t have control over the styles, and also encourages
+layer separation.</p>
+<p>Source:</p>
+<p><a href="http://goo.gl/XoDym">Douglas Crockford: &quot;Theory of the Dom&quot; (2 of 3)</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/manipulating-dom-elements-and-styles/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-02-07T19:00:00.000Z">
+          Feb 7th, 2011
+        </time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/the-script-tag-and-the-dom/">The script tag and the DOM</a></h1>
+  
+
+
+    </header>
+    <div class="entry">
+      
+        <p>Today I&#39;m going to talk about the DOM. Things you might not know, tricks,
+nuances and some best practices (I think). So, let&#39;s get to it.</p>
+<h2><code>&lt;script&gt;</code></h2>
+<p>It first appeared in Netscape Navigator 2 as a way to put programs in HTML
+documents and it then became part of the HTML standard in version 4.</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&lt;script type="text/javascript"&gt;...&lt;/script&gt;
+</pre></td></tr></table></figure>
+
+
+<h2><code>&lt;!-- // --&gt;</code></h2>
+<p>The <code>&lt;!-- // --&gt;</code> hack was a workaround to prevent HTML documents from
+displaying JavaScript code by browsers that didn&#39;t understand it. You can still
+see this pattern in pages but it&#39;s no longer necessary as today&#39;s browsers
+understand both the script tag and JavaScript.</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>&lt;script type="text/javascript"&gt;
+&lt;!--
+  code here
+// --&gt;
+&lt;/script&gt;
+</pre></td></tr></table></figure>
+
+
+<h2>The <code>language</code> attribute</h2>
+<p>Microsoft came up with it as a way to select what kind of language (e.g.
+VBScript) you wanted to use for your program. The W3C deprecated this in favor
+of the <code>type</code>. Avoid the <code>language</code> attribute.</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&lt;script language="javascript" type="text/javascript"&gt;...&lt;/script&gt;
+</pre></td></tr></table></figure>
+
+
+<h2>The <code>src</code> attribute</h2>
+<p>It allows you to load a script from an external file. Great, because you don&#39;t
+want to put JavaScript in your HTML, for a large number of reasons: it makes the
+HTML file heavier, it becomes less maintainable, it becomes less scalable, it&#39;s
+not cachable, it becomes hard to minify or inspect, etc. It is highly
+recommended that you do not write JavaScript in your HTML and instead use the
+<code>src</code> attribute.</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&lt;script type="text/javascript" scr="js/script.js"&gt;&lt;/script&gt;
+</pre></td></tr></table></figure>
+
+
+<h2>The <code>type</code> attribute</h2>
+<p>The W3C added the <code>type</code> attribute to replace the <code>language</code> one. It takes a
+MIME type instead of the name of the language. The official MIME type for
+JavaScript is <code>application/javascript</code> or <code>application/ecmascript</code> and the most
+up to date browsers understand this, but not IE. So, if you want cross-browser
+support (and you should) you have to use <code>type=&quot;text/javascript&quot;</code>, at least for
+now. This is a required attribute for HTML validation, but in practice you can
+just leave this out, the default language on all major browsers is JavaScript
+and besides if you&#39;re using <code>src</code> it ignores it.</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>&lt;script type="text/javascript"&gt;...&lt;/script&gt;
+&lt;script&gt;...&lt;/script&gt;
+&lt;script type="text/javascript" src="js/script.js"&gt;...&lt;/script&gt;
+&lt;script src="js/script.js"&gt;...&lt;/script&gt;&lt;/pre&gt;
+</pre></td></tr></table></figure>
+
+
+<h2>Loading time</h2>
+<p>Because of the way the browser works, loading of a page&#39;s assets is incremental
+and single-threaded, it is recommended that the <code>script</code> tags be placed as low
+in the <code>body</code> as possible. It is also recommended to place your CSS i.e. <code>link</code>,
+as high in the <code>head</code> as possible, this will greatly improve the user experience.</p>
+<p>You should also minify, gzip and join your script files into one. These will
+reduce file size and the number of HTTP requests and thus, the time it takes for
+the browser to load the page.</p>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel="stylesheet" type="text/css" href="css/styles.css"&gt;
+    &lt;!-- head contents here --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- body contents here --&gt;
+    &lt;script type="text/javascript" src="js/script.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre></td></tr></table></figure>
+
+<h2><code>document.write</code></h2>
+<p>If you call this before the <code>onload</code> event triggers it will insert stuff into
+your document, but if you do it after it, it destroys your document and replace
+it with new stuff. You should avoid using <code>document.write</code>, there are better
+alternatives now.</p>
+<h2>Collections</h2>
+<ul>
+<li><code>document.anchors</code></li>
+<li><code>document.applets</code></li>
+<li><code>document.embeds</code></li>
+<li><code>document.forms</code></li>
+<li><code>document.frames</code></li>
+<li><code>document.images</code></li>
+<li><code>document.plugins</code></li>
+<li><code>document.scripts</code></li>
+<li><code>document.stylesheets</code></li>
+</ul>
+<p>Netscape provided these as a way to get and modify elements easier. These are
+still available but obsolete and you should avoid using them as there are better
+alternatives now.</p>
+<h2>The <code>name</code> and <code>id</code> attributes</h2>
+<p>If an element didn&#39;t have an <code>id</code> but it had a <code>name</code> with the same value, you
+could still get access to it via DOM methods. They used to be interchangeable
+but they are not anymore.</p>
+<h3>The HTML:</h3>
+<figure class="highlight lang-html"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>&lt;input type="text" name="firstname" value="my value"&gt;
+</pre></td></tr></table></figure>
+
+<h3>The JavaScript:</h3>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="keyword">var</span> input = document.getElementById(<span class="string">'firstname'</span>);
+input.value = <span class="string">'another value'</span>; <span class="comment">// sets a value to "firstname" field</span>
+</pre></td></tr></table></figure>
+
+
+<h2><code>document.all</code></h2>
+<p>Microsoft came up with this as a type of super collection that contained any tag
+that had a <code>name</code> or <code>id</code>. Since this is propriety thing and not cross-browser,
+it is best to not use it.</p>
+<p>Some of the topics that I did not cover in this post were browser history, how a
+browser works and document tree structure. If you&#39;re interested, click the link
+below to watch the video.</p>
+<p>Source:</p>
+<p><a href="http://goo.gl/KVh23">Douglas Crockford: &quot;Theory of the DOM&quot; (1 of 3)</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+          <div class="alignleft">
+            <a href="/2011/the-script-tag-and-the-dom/#more" class="more-link">Read More</a>
+          </div>
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+    <a href="/archives/page/5/" class="alignleft prev">Prev</a>
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:alebelcor.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>1</small></li>
+  
+    <li><a href="/tags/DOM/">DOM</a><small>4</small></li>
+  
+    <li><a href="/tags/HTML5/">HTML5</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>12</small></li>
+  
+    <li><a href="/tags/Tools/">Tools</a><small>2</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget twitter">
+  <h3 class="title">Tweets</h3>
+  <ul id="tweets"></ul>
+</div>
+
+<script type="text/javascript">
+var twitter_stream = ['alebelcor', 5, false];
+var moment_js_path = '/js/moment.min.js';
+</script>
+<script src="/js/twitter.js"></script>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner">
+    <div class="alignleft">
+  
+  &copy; 2013 Alejandro Beltrán (&#10061;&#7461;&#10061;&#651;)
+  
+</div>
+<div class="clearfix"></div>
+
+  </footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+</body>
+</html>

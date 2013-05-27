@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  
+  <title>The this keyword in JavaScript &mdash; Alejandro Beltrán</title>
+  <meta name="author" content="Alejandro Beltrán">
+  
+  <meta name="description" content="Blogging about Front End Development, Software and stuff">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="The this keyword in JavaScript">
+  <meta property="og:site_name" content="Alejandro Beltrán">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Alejandro Beltrán" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.min.js"></script><![endif]-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  
+<script>
+  var _gaq=[['_setAccount','UA-39910763-1'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src='//www.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+</head>
+
+<body>
+  <header id="header" class="inner">
+    <div class="alignleft">
+  <h1><a href="/">Alejandro Beltrán</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+  </header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2011-07-09T22:57:00.000Z">
+          Jul 9th, 2011
+        </time>
+      
+      
+  
+    <h1 class="title"><a href="/2011/this-keyword-in-javascript/">The this keyword in JavaScript</a></h1>
+  
+
+
+    </header>
+    <div class="entry">
+      
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet" tw:via="alebelcor"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+  </div>
+  <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51a2a190502ebfe9"></script>
+
+
+        <h2>What does <code>this</code> mean?</h2>
+<p>Short answer, it depends.</p>
+<p>In general terms, you could say that the <code>this</code> keyword, in JavaScript, refers to
+the function&#39;s context, how it&#39;s invoked. There are four ways in which a function
+can be invoked: method form, function form, constructor form and apply form.</p>
+<h2>Method form</h2>
+<p>If a function is invoked in the method form, <code>this</code> will be bound to the object
+that owns the function:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="keyword">var</span> myObj = {
+    name   : <span class="string">'Chuck'</span>,
+    sayName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">return</span> <span class="string">'Hello '</span> + <span class="keyword">this</span>.name;
+    }
+};
+
+myObj.sayName(); <span class="comment">// `this` refers to myObj, returns 'Hello Chuck'</span>
+</pre></td></tr></table></figure>
+
+
+<h2>Function form</h2>
+<p>This means taking a function value and calling it. In ECMAScript 3, <code>this</code> would
+be bound to the global object:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="keyword">var</span> myFunc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="keyword">return</span> <span class="keyword">this</span>.location.href;
+};
+
+myFunc(); <span class="comment">// `this` refers to window (in browsers), returns the current URL</span>
+</pre></td></tr></table></figure>
+
+<p>In ECMAScript 5 Strict Mode (<a href="http://goo.gl/0V8Ef">almost fully supported</a>), <code>this</code>
+was changed so that it would refer to <code>undefined</code> instead:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="keyword">var</span> myFunc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="string">'use strict'</span>;
+    <span class="keyword">return</span> <span class="keyword">this</span>.location.href;
+};
+
+myFunc(); <span class="comment">// error, `this` is undefined</span>
+</pre></td></tr></table></figure>
+
+
+<h2>Constructor form</h2>
+<p>A constructor function is meant to be called using the <code>new</code> keyword, in this
+form, <code>this</code> will refer to the object being produced:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="keyword">var</span> MyConstructor = <span class="function"><span class="keyword">function</span> <span class="params">(name)</span> {</span>
+    <span class="keyword">this</span>.name    = name;
+    <span class="keyword">this</span>.sayName = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+        <span class="keyword">return</span> <span class="string">'Hello '</span> + <span class="keyword">this</span>.name;
+    };
+};
+
+<span class="keyword">var</span> myObj = <span class="keyword">new</span> MyConstructor(<span class="string">'Chuck'</span>);
+
+myObj.name;      <span class="comment">// 'Chuck'</span>
+myObj.sayName(); <span class="comment">// 'Hello Chuck'</span>
+</pre></td></tr></table></figure>
+
+
+<h2>Apply form</h2>
+<p>Functions are objects and, as most objects, they have methods. This form refers
+to using the function&#39;s methods <code>apply</code> or <code>call</code> to call a function. Both
+methods take whatever first argument you pass and bound <code>this</code> to it. They differ
+in the way they provide the arguments to the function being invoked.</p>
+<p>The <code>apply</code> method takes an array of arguments:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre><span class="keyword">var</span> myObj1 = {
+    name: <span class="string">'Chuck'</span>
+};
+
+<span class="keyword">var</span> myObj2 = {
+    name: <span class="string">'Charles'</span>
+};
+
+<span class="keyword">var</span> sayWelcome = <span class="function"><span class="keyword">function</span> <span class="params">(location)</span> {</span>
+    <span class="keyword">return</span> <span class="string">'Hello '</span> + <span class="keyword">this</span>.name + <span class="string">'. Welcome to '</span> + location;
+};
+
+sayWelcome.apply(myObj1, [<span class="string">'New York'</span>]); <span class="comment">// 'Hello Chuck. Welcome to New York'</span>
+sayWelcome.apply(myObj2, [<span class="string">'Toronto'</span>]);  <span class="comment">// 'Hello Charles. Welcome to Toronto'</span>
+</pre></td></tr></table></figure>
+
+<p>The <code>call</code> method takes a list of arguments separated by commas:</p>
+<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>sayWelcome.call(myObj1, <span class="string">'New York'</span>); <span class="comment">// 'Hello Chuck. Welcome to New York'</span>
+sayWelcome.call(myObj2, <span class="string">'Toronto'</span>);  <span class="comment">// 'Hello Charles. Welcome to Toronto'</span>
+</pre></td></tr></table></figure>
+
+<h2>Summary</h2>
+<p>The value of <code>this</code> depends on the calling form:</p>
+<ul>
+<li>Method form: it&#39;s bound to the object containing the method.</li>
+<li>Function form: it&#39;s bound to either the global object (ECMAScript 3), or to
+<code>undefined</code> in (ECMAScript 5 Strict Mode).</li>
+<li>Constructor form: it&#39;s bound to the new object being constructed.</li>
+<li>Apply form: it&#39;s bound to the first argument passed to <code>apply</code> or <code>call</code>.</li>
+</ul>
+<p>Source:</p>
+<p><a href="http://goo.gl/s9vkC">Crockford on JavaScript - Act III: Function the Ultimate</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:alebelcor.github.io">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/CSS/">CSS</a><small>1</small></li>
+  
+    <li><a href="/tags/DOM/">DOM</a><small>4</small></li>
+  
+    <li><a href="/tags/HTML5/">HTML5</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>12</small></li>
+  
+    <li><a href="/tags/Tools/">Tools</a><small>2</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget twitter">
+  <h3 class="title">Tweets</h3>
+  <ul id="tweets"></ul>
+</div>
+
+<script type="text/javascript">
+var twitter_stream = ['alebelcor', 5, false];
+var moment_js_path = '/js/moment.min.js';
+</script>
+<script src="/js/twitter.js"></script>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner">
+    <div class="alignleft">
+  
+  &copy; 2013 Alejandro Beltrán (&#10061;&#7461;&#10061;&#651;)
+  
+</div>
+<div class="clearfix"></div>
+
+  </footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+</body>
+</html>
