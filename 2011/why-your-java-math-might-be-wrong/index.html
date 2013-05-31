@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset=utf-8>
+  <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
   
   <title>Why your Java math might be wrong &mdash; Alejandro Beltrán</title>
-  <meta name="author" content="Alejandro Beltrán">
+  <meta name=author content="Alejandro Beltrán">
   
-  <meta name="description" content="Blogging about Front End Development, Software and stuff">
+  <meta name=description content="Blogging about Front End Development, Software and stuff">
   
   
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name=viewport content="width=device-width, initial-scale=1">
 
-  <meta property="og:title" content="Why your Java math might be wrong">
-  <meta property="og:site_name" content="Alejandro Beltrán">
+  <meta property=og:title content="Why your Java math might be wrong">
+  <meta property=og:site_name content="Alejandro Beltrán">
 
   
-    <meta property="og:image" content="undefined">
+    <meta property=og:image content=undefined>
   
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Alejandro Beltrán" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="/favicon.png" rel=icon>
+  <link rel=alternate href="/atom.xml" title="Alejandro Beltrán" type="application/atom+xml">
+  <link rel=stylesheet href="/css/style.css" media=screen type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic" rel=stylesheet type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic" rel=stylesheet type="text/css">
   <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.min.js"></script><![endif]-->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
@@ -34,16 +34,15 @@
   s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
 
-
 </head>
 
 <body>
-  <header id="header" class="inner">
-    <div class="alignleft">
+  <header id=header class=inner>
+    <div class=alignleft>
   <h1><a href="/">Alejandro Beltrán</a></h1>
   <h2><a href="/"></a></h2>
 </div>
-<nav id="main-nav" class="alignright">
+<nav id=main-nav class=alignright>
   <ul>
     
       <li><a href="/">Home</a></li>
@@ -51,69 +50,67 @@
       <li><a href="/archives">Archives</a></li>
     
   </ul>
-  <div class="clearfix"></div>
+  <div class=clearfix></div>
 </nav>
-<div class="clearfix"></div>
+<div class=clearfix></div>
   </header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div id=content class=inner>
+    <div id=main-col class=alignleft><div id=wrapper><article class=post>
   
-  <div class="post-content">
+  <div class=post-content>
     <header>
       
-        <div class="icon"></div>
-        <time datetime="2011-06-16T17:00:00.000Z">
+        <div class=icon></div>
+        <time datetime=2011-06-16T17:00:00.000Z>
           Jun 16th, 2011
         </time>
       
       
   
-    <h1 class="title"><a href="/2011/why-your-java-math-might-be-wrong/">Why your Java math might be wrong</a></h1>
+    <h1 class=title><a href="/2011/why-your-java-math-might-be-wrong/">Why your Java math might be wrong</a></h1>
   
 
-
     </header>
-    <div class="entry">
+    <div class=entry>
       
         
           
   <div class="addthis addthis_toolbox addthis_default_style">
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+      <a class=addthis_button_facebook_like fb:like:layout=button_count></a>
     
     
-      <a class="addthis_button_tweet" tw:via="alebelcor"></a>
+      <a class=addthis_button_tweet tw:via=alebelcor></a>
     
     
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+      <a class=addthis_button_google_plusone g:plusone:size=medium></a>
     
     
   </div>
   <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51a2a190502ebfe9"></script>
 
-
         
         <p>We all know that mathematical operations with decimals in JavaScript are no good.</p>
-<a name="more"></a>
+<a name=more></a>
 
 <p>For instance:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="number">1.1</span> + <span class="number">2.2</span>; <span class="comment">// should be 3.3, but the result is 3.3000000000000003</span>
+<figure class="highlight lang-javascript"><table><tr><td class=gutter><pre>1
+</pre></td><td class=code><pre><span class=number>1.1</span> + <span class=number>2.2</span>; <span class=comment>// should be 3.3, but the result is 3.3000000000000003</span>
 </pre></td></tr></table></figure>
 
 <p>It turns out this is a cross to bare for pretty much any language that uses the
 IEEE-754 standard to implement a floating point number and that includes...
 <em>drums</em>... <strong>Java</strong>.</p>
-<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-java"><table><tr><td class=gutter><pre>1
 2
 3
 4
 5
-</pre></td><td class="code"><pre><span class="comment">// Adding doubles</span>
-System.out.println(<span class="number">1.1</span> + <span class="number">2.2</span>);   <span class="comment">// 3.3000000000000003</span>
+</pre></td><td class=code><pre><span class=comment>// Adding doubles</span>
+System.out.println(<span class=number>1.1</span> + <span class=number>2.2</span>);   <span class=comment>// 3.3000000000000003</span>
 
-<span class="comment">// Adding floats</span>
-System.out.println(<span class="number">1.1</span>f + <span class="number">2.2</span>f); <span class="comment">// 3.3000002</span>
+<span class=comment>// Adding floats</span>
+System.out.println(<span class=number>1.1</span>f + <span class=number>2.2</span>f); <span class=comment>// 3.3000002</span>
 </pre></td></tr></table></figure>
 
 <p>So if you&#39;re doing these kinds of operations with <code>float</code> or <code>double</code> in Java you
@@ -128,12 +125,12 @@ you’re going to come up with the right result, and you don’t.</p>
 <p>The proper way to do this is using the <code>BigDecimal</code> class. Check out the
 <a href="http://goo.gl/r78E1">documentation</a>.</p>
 <p>Let&#39;s try it again, this time using <code>BigDecimal</code>:</p>
-<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-java"><table><tr><td class=gutter><pre>1
 2
 3
-</pre></td><td class="code"><pre>BigDecimal num1 = <span class="keyword">new</span> BigDecimal(<span class="number">1.1</span>);
-BigDecimal num2 = <span class="keyword">new</span> BigDecimal(<span class="number">2.2</span>);
-System.out.println(num1.add(num2)); <span class="comment">// 3.30000000000000026645352591003756...etc.</span>
+</pre></td><td class=code><pre>BigDecimal num1 = <span class=keyword>new</span> BigDecimal(<span class=number>1.1</span>);
+BigDecimal num2 = <span class=keyword>new</span> BigDecimal(<span class=number>2.2</span>);
+System.out.println(num1.add(num2)); <span class=comment>// 3.30000000000000026645352591003756...etc.</span>
 </pre></td></tr></table></figure>
 
 <p>Oh noes! what happened? I thought <code>BigDecimal</code> was supposed to solve all my problems.</p>
@@ -144,12 +141,12 @@ used in these operations. They cannot accurately represent numbers with decimals
 <p>OK, how do we fix this? There&#39;s a constructor that takes a <code>String</code> argument
 (didn&#39;t you look at the documentation?). That&#39;s how we should always do it. Pass
 a <code>String</code> so you won&#39;t lose precision:</p>
-<figure class="highlight lang-java"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-java"><table><tr><td class=gutter><pre>1
 2
 3
-</pre></td><td class="code"><pre>BigDecimal num3 = <span class="keyword">new</span> BigDecimal(<span class="string">"1.1"</span>);
-BigDecimal num4 = <span class="keyword">new</span> BigDecimal(<span class="string">"2.2"</span>);
-System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
+</pre></td><td class=code><pre>BigDecimal num3 = <span class=keyword>new</span> BigDecimal(<span class=string>"1.1"</span>);
+BigDecimal num4 = <span class=keyword>new</span> BigDecimal(<span class=string>"2.2"</span>);
+System.out.println(num3.add(num4)); <span class=comment>// 3.3, finally</span>
 </pre></td></tr></table></figure>
 
 <p>Perfect! now lawsuits won&#39;t be falling from the sky.</p>
@@ -164,31 +161,29 @@ System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
         
         
   
-  <div class="tags">
+  <div class=tags>
     <a href="/tags/Java/">Java</a>
   </div>
 
       
-      <div class="clearfix"></div>
+      <div class=clearfix></div>
     </footer>
   </div>
 </article>
 
 
-<section id="comment">
-  <h1 class="title">Comments</h1>
-  <div id="disqus_thread">
+<section id=comment>
+  <h1 class=title>Comments</h1>
+  <div id=disqus_thread>
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
-
-
 </div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:alebelcor.github.io">
+    <aside id=sidebar class=alignright>
+  <div class=search>
+  <form action="//google.com/search" accept-charset=utf-8>
+    <input type=search name=q results=0 placeholder=Search>
+    <input type=hidden name=q value=site:alebelcor.github.io>
   </form>
 </div>
 
@@ -196,8 +191,8 @@ System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
 
   
 <div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
+  <h3 class=title>Tags</h3>
+  <ul class=entry>
   
     <li><a href="/tags/CSS/">CSS</a><small>1</small></li>
   
@@ -219,28 +214,26 @@ System.out.println(num3.add(num4)); <span class="comment">// 3.3, finally</span>
 
   
 <div class="widget twitter">
-  <h3 class="title">Tweets</h3>
-  <ul id="tweets"></ul>
+  <h3 class=title>Tweets</h3>
+  <ul id=tweets></ul>
 </div>
 
-<script type="text/javascript">
-var twitter_stream = ['alebelcor', 5, false];
-var moment_js_path = '/js/moment.min.js';
+<script>
+    var twitter_stream = ['alebelcor', 5, false];
+    var moment_js_path = '/js/moment.min.js';
 </script>
 <script src="/js/twitter.js"></script>
 
-
 </aside>
-    <div class="clearfix"></div>
+    <div class=clearfix></div>
   </div>
-  <footer id="footer" class="inner">
-    <div class="alignleft">
+  <footer id=footer class=inner>
+    <div class=alignleft>
   
   &copy; 2013 Alejandro Beltrán (&#10061;&#7461;&#10061;&#651;)
   
 </div>
-<div class="clearfix"></div>
-
+<div class=clearfix></div>
   </footer>
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
@@ -249,15 +242,14 @@ var moment_js_path = '/js/moment.min.js';
 <script>
 var disqus_shortname = 'alebelcor-github-io';
 
-(function(){
-  var dsq = document.createElement('script');
-  dsq.type = 'text/javascript';
-  dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+(function () {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>
-
 
 
 

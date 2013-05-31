@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset=utf-8>
+  <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
   
   <title>HTMLCollections &amp; NodeLists &mdash; Alejandro Beltrán</title>
-  <meta name="author" content="Alejandro Beltrán">
+  <meta name=author content="Alejandro Beltrán">
   
-  <meta name="description" content="Blogging about Front End Development, Software and stuff">
+  <meta name=description content="Blogging about Front End Development, Software and stuff">
   
   
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name=viewport content="width=device-width, initial-scale=1">
 
-  <meta property="og:title" content="HTMLCollections &amp; NodeLists">
-  <meta property="og:site_name" content="Alejandro Beltrán">
+  <meta property=og:title content="HTMLCollections &amp; NodeLists">
+  <meta property=og:site_name content="Alejandro Beltrán">
 
   
-    <meta property="og:image" content="undefined">
+    <meta property=og:image content=undefined>
   
 
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Alejandro Beltrán" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="/favicon.png" rel=icon>
+  <link rel=alternate href="/atom.xml" title="Alejandro Beltrán" type="application/atom+xml">
+  <link rel=stylesheet href="/css/style.css" media=screen type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic" rel=stylesheet type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic" rel=stylesheet type="text/css">
   <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.min.js"></script><![endif]-->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   
@@ -34,16 +34,15 @@
   s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
 
-
 </head>
 
 <body>
-  <header id="header" class="inner">
-    <div class="alignleft">
+  <header id=header class=inner>
+    <div class=alignleft>
   <h1><a href="/">Alejandro Beltrán</a></h1>
   <h2><a href="/"></a></h2>
 </div>
-<nav id="main-nav" class="alignright">
+<nav id=main-nav class=alignright>
   <ul>
     
       <li><a href="/">Home</a></li>
@@ -51,59 +50,57 @@
       <li><a href="/archives">Archives</a></li>
     
   </ul>
-  <div class="clearfix"></div>
+  <div class=clearfix></div>
 </nav>
-<div class="clearfix"></div>
+<div class=clearfix></div>
   </header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  <div id=content class=inner>
+    <div id=main-col class=alignleft><div id=wrapper><article class=post>
   
-  <div class="post-content">
+  <div class=post-content>
     <header>
       
-        <div class="icon"></div>
-        <time datetime="2011-03-28T17:30:00.000Z">
+        <div class=icon></div>
+        <time datetime=2011-03-28T17:30:00.000Z>
           Mar 28th, 2011
         </time>
       
       
   
-    <h1 class="title"><a href="/2011/htmlcollections-nodelists/">HTMLCollections &amp; NodeLists</a></h1>
+    <h1 class=title><a href="/2011/htmlcollections-nodelists/">HTMLCollections &amp; NodeLists</a></h1>
   
 
-
     </header>
-    <div class="entry">
+    <div class=entry>
       
         
           
   <div class="addthis addthis_toolbox addthis_default_style">
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+      <a class=addthis_button_facebook_like fb:like:layout=button_count></a>
     
     
-      <a class="addthis_button_tweet" tw:via="alebelcor"></a>
+      <a class=addthis_button_tweet tw:via=alebelcor></a>
     
     
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+      <a class=addthis_button_google_plusone g:plusone:size=medium></a>
     
     
   </div>
   <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51a2a190502ebfe9"></script>
 
-
         
         <p>Most of us believed, at least for some time, that in our DOM Scripting, we
 always dealt with arrays in our JavaScript:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-javascript"><table><tr><td class=gutter><pre>1
 2
 3
-</pre></td><td class="code"><pre><span class="keyword">var</span> myLinks = document.getElementsByTagName(<span class="string">'a'</span>); <span class="comment">// we have three links</span>
+</pre></td><td class=code><pre><span class=keyword>var</span> myLinks = document.getElementsByTagName(<span class=string>'a'</span>); <span class=comment>// we have three links</span>
 
-myLinks.length; <span class="comment">// "3"</span>
+myLinks.length; <span class=comment>// "3"</span>
 </pre></td></tr></table></figure>
 
-<a name="more"></a>
+<a name=more></a>
 
 <p>We later found out that the things we thought were arrays, were instead
 array-like objects. But how exactly are they like arrays? Those &quot;array-like&quot;
@@ -120,19 +117,19 @@ odeList objects in the DOM are live.</p>
 
 <p>But what does that mean? It means that live collections, if modified, are
 updated as the program runs. For example, this is an infinte loop:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-javascript"><table><tr><td class=gutter><pre>1
 2
 3
 4
 5
 6
 7
-</pre></td><td class="code"><pre><span class="keyword">var</span> myLinks = document.getElementsByTagName(<span class="string">'a'</span>), <span class="comment">// we have three links</span>
+</pre></td><td class=code><pre><span class=keyword>var</span> myLinks = document.getElementsByTagName(<span class=string>'a'</span>), <span class=comment>// we have three links</span>
     i,
     j;
 
-<span class="keyword">for</span> (i = <span class="number">0</span>, j = myLinks.length; i &lt; j; i += <span class="number">1</span> ) {
-    document.body.appendChild(document.createElement(<span class="string">'a'</span>));
+<span class=keyword>for</span> (i = <span class=number>0</span>, j = myLinks.length; i &lt; j; i += <span class=number>1</span> ) {
+    document.body.appendChild(document.createElement(<span class=string>'a'</span>));
 }
 </pre></td></tr></table></figure>
 
@@ -147,7 +144,7 @@ like arrays because:</p>
 <li>They have an associated index to each value in the container. But that&#39;s
 something an object can have too:</li>
 </ul>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-javascript"><table><tr><td class=gutter><pre>1
 2
 3
 4
@@ -156,15 +153,15 @@ something an object can have too:</li>
 7
 8
 9
-</pre></td><td class="code"><pre><span class="keyword">var</span> myObj = {
-    <span class="number">0</span>: <span class="string">'zero'</span>,
-    <span class="number">1</span>: <span class="string">'one'</span>,
-    <span class="number">2</span>: <span class="string">'two'</span>,
-    <span class="number">3</span>: <span class="string">'three'</span>
+</pre></td><td class=code><pre><span class=keyword>var</span> myObj = {
+    <span class=number>0</span>: <span class=string>'zero'</span>,
+    <span class=number>1</span>: <span class=string>'one'</span>,
+    <span class=number>2</span>: <span class=string>'two'</span>,
+    <span class=number>3</span>: <span class=string>'three'</span>
 };
 
-alert(myObj[<span class="number">0</span>]); <span class="comment">// 'zero'</span>
-alert(myObj[<span class="number">3</span>]); <span class="comment">// 'three'</span>
+alert(myObj[<span class=number>0</span>]); <span class=comment>// 'zero'</span>
+alert(myObj[<span class=number>3</span>]); <span class=comment>// 'three'</span>
 </pre></td></tr></table></figure>
 
 <p>The <code>alert</code> statements might look like they want the elements with index <code>0</code>
@@ -177,7 +174,7 @@ methods.</li>
 </ul>
 <p>Be prepared, these are some of the DOM methods (that I know of) that return an
 HTMLCollection or NodeList:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-javascript"><table><tr><td class=gutter><pre>1
 2
 3
 4
@@ -216,9 +213,9 @@ HTMLCollection or NodeList:</p>
 37
 38
 39
-</pre></td><td class="code"><pre><span class="comment">// DOM Level 1/HTML 4.0</span>
-<span class="comment">// ---------------------------</span>
-<span class="comment">// Return an HTMLCollection</span>
+</pre></td><td class=code><pre><span class=comment>// DOM Level 1/HTML 4.0</span>
+<span class=comment>// ---------------------------</span>
+<span class=comment>// Return an HTMLCollection</span>
 document.anchors
 document.applets
 document.forms
@@ -233,13 +230,13 @@ tableElement.rows
 tableElement.tBodies
 tableRowElement.cells
 
-<span class="comment">// Not part of any standard</span>
+<span class=comment>// Not part of any standard</span>
 document.embeds
 document.plugins
 
-<span class="comment">// DOM Level 2</span>
-<span class="comment">// ------------------</span>
-<span class="comment">// Return a NodeList</span>
+<span class=comment>// DOM Level 2</span>
+<span class=comment>// ------------------</span>
+<span class=comment>// Return a NodeList</span>
 Node.childNodes
 
 document.getElementsByName
@@ -250,9 +247,9 @@ document.getElementsByName
 element.getElementsByTagName
 element.getElementsByTagNameNS
 
-<span class="comment">// WHATWG Web Applications 1.0</span>
-<span class="comment">// ---------------------------</span>
-<span class="comment">// Return a NodeList</span>
+<span class=comment>// WHATWG Web Applications 1.0</span>
+<span class=comment>// ---------------------------</span>
+<span class=comment>// Return a NodeList</span>
 document.getElementsByClassName
 element.getElementsByClassName
 </pre></td></tr></table></figure>
@@ -261,14 +258,14 @@ element.getElementsByClassName
 <code>NodeLists</code> because they are inherintely live. There&#39;s an exception to this,
 there are <em>static</em> <code>NodeLists</code> that act as snapshots and do not update when the
 document is modified:</p>
-<figure class="highlight lang-javascript"><table><tr><td class="gutter"><pre>1
+<figure class="highlight lang-javascript"><table><tr><td class=gutter><pre>1
 2
 3
 4
 5
-</pre></td><td class="code"><pre><span class="comment">// Selectors API Level 1</span>
-<span class="comment">// ---------------------</span>
-<span class="comment">// Return a static NodeList</span>
+</pre></td><td class=code><pre><span class=comment>// Selectors API Level 1</span>
+<span class=comment>// ---------------------</span>
+<span class=comment>// Return a static NodeList</span>
 document.querySelectorAll
 element.querySelectorAll
 </pre></td></tr></table></figure>
@@ -293,31 +290,29 @@ exception) but you cannot say that this was a boring topic, or was it?</p>
         
         
   
-  <div class="tags">
+  <div class=tags>
     <a href="/tags/JavaScript/">JavaScript</a>, <a href="/tags/DOM/">DOM</a>
   </div>
 
       
-      <div class="clearfix"></div>
+      <div class=clearfix></div>
     </footer>
   </div>
 </article>
 
 
-<section id="comment">
-  <h1 class="title">Comments</h1>
-  <div id="disqus_thread">
+<section id=comment>
+  <h1 class=title>Comments</h1>
+  <div id=disqus_thread>
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
-
-
 </div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="q" value="site:alebelcor.github.io">
+    <aside id=sidebar class=alignright>
+  <div class=search>
+  <form action="//google.com/search" accept-charset=utf-8>
+    <input type=search name=q results=0 placeholder=Search>
+    <input type=hidden name=q value=site:alebelcor.github.io>
   </form>
 </div>
 
@@ -325,8 +320,8 @@ exception) but you cannot say that this was a boring topic, or was it?</p>
 
   
 <div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
+  <h3 class=title>Tags</h3>
+  <ul class=entry>
   
     <li><a href="/tags/CSS/">CSS</a><small>1</small></li>
   
@@ -348,28 +343,26 @@ exception) but you cannot say that this was a boring topic, or was it?</p>
 
   
 <div class="widget twitter">
-  <h3 class="title">Tweets</h3>
-  <ul id="tweets"></ul>
+  <h3 class=title>Tweets</h3>
+  <ul id=tweets></ul>
 </div>
 
-<script type="text/javascript">
-var twitter_stream = ['alebelcor', 5, false];
-var moment_js_path = '/js/moment.min.js';
+<script>
+    var twitter_stream = ['alebelcor', 5, false];
+    var moment_js_path = '/js/moment.min.js';
 </script>
 <script src="/js/twitter.js"></script>
 
-
 </aside>
-    <div class="clearfix"></div>
+    <div class=clearfix></div>
   </div>
-  <footer id="footer" class="inner">
-    <div class="alignleft">
+  <footer id=footer class=inner>
+    <div class=alignleft>
   
   &copy; 2013 Alejandro Beltrán (&#10061;&#7461;&#10061;&#651;)
   
 </div>
-<div class="clearfix"></div>
-
+<div class=clearfix></div>
   </footer>
   <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
@@ -378,15 +371,14 @@ var moment_js_path = '/js/moment.min.js';
 <script>
 var disqus_shortname = 'alebelcor-github-io';
 
-(function(){
-  var dsq = document.createElement('script');
-  dsq.type = 'text/javascript';
-  dsq.async = true;
-  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+(function () {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>
-
 
 
 
