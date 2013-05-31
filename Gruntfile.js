@@ -10,6 +10,25 @@ module.exports = function (grunt) {
             all   : ['public', 'db.json']
         },
 
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments            : true,
+                    collapseBooleanAttributes : true,
+                    removeAttributeQuotes     : true,
+                    removeRedundantAttributes : true,
+                    useShortDoctype           : true,
+                    removeEmptyAttributes     : true
+                },
+                files: [{
+                    expand: true,
+                    cwd   : 'public',
+                    src   : ['**/*.html'],
+                    dest  : 'public'
+                }]
+            }
+        },
+
         cssmin: {
             dist: {
                 src : 'public/css/style.css',
@@ -42,7 +61,7 @@ module.exports = function (grunt) {
             },
             posts: {
                 files  : ['source/**/*.md', 'themes/**/*.ejs'],
-                tasks  : ['shell:generate']
+                tasks  : ['shell:generate', 'htmlmin']
             },
             styles: {
                 files: ['public/css/style.css'],
@@ -52,10 +71,11 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('generate', 'shell:generate');
+    grunt.registerTask('generate', ['shell:generate', 'htmlmin']);
 };
