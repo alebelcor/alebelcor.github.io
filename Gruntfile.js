@@ -46,8 +46,22 @@ module.exports = function (grunt) {
         },
 
         shell: {
+            options: {
+                failOnError: true
+            },
             generate: {
                 command: 'hexo generate'
+            },
+            deploy: {
+                command: [
+                    'cd .deploy',
+                    'rm -rf *',
+                    'cd ..',
+                    'cp -r public/* .deploy/'
+
+                    // INFO: apparently we can't do a git push using grunt-shell
+                    // so that will have to still be a manual step
+                ].join('&&')
             }
         },
 
@@ -60,8 +74,8 @@ module.exports = function (grunt) {
                 tasks: ['clean:all', 'shell:generate']
             },
             posts: {
-                files  : ['source/**/*.md', 'themes/**/*.ejs'],
-                tasks  : ['shell:generate', 'htmlmin']
+                files: ['source/**/*.md', 'themes/**/*.ejs'],
+                tasks: ['shell:generate', 'htmlmin']
             },
             styles: {
                 files: ['public/css/style.css'],
@@ -78,4 +92,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('generate', ['shell:generate', 'htmlmin']);
+    grunt.registerTask('deploy', 'shell:deploy');
 };
