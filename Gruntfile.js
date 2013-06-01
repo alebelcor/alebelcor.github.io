@@ -31,8 +31,12 @@ module.exports = function (grunt) {
 
         cssmin: {
             dist: {
-                src : 'public/css/style.css',
-                dest: 'public/css/style.css'
+                files: [{
+                    expand: true,
+                    cwd   : 'public',
+                    src   : ['**/*.css', '!**/*.min.css'],
+                    dest  : 'public'
+                }]
             }
         },
 
@@ -78,7 +82,7 @@ module.exports = function (grunt) {
                 tasks: ['shell:generate', 'htmlmin']
             },
             styles: {
-                files: ['public/css/style.css'],
+                files: ['public/**/*.css'],
                 tasks: ['cssmin']
             }
         }
