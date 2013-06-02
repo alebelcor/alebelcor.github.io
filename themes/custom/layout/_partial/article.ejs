@@ -16,7 +16,7 @@
       <% if (item.excerpt && index) { %>
         <%- item.excerpt %>
       <% } else { %>
-        <% if (item.layout != 'page') { %>
+        <% if (!index && item.layout != 'page') { %>
           <%- partial('post/share') %>
         <% } %>
         <%- item.content %>
