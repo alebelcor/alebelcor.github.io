@@ -26,19 +26,27 @@ cross-platform and works on Windows (yay). So I gave it a try.
 
 To create a new post:
 
-    hexo new post "My post title"
+```bash
+hexo new post "My post title"
+```
 
 To generate HTML:
 
-    hexo generate
+```bash
+hexo generate
+```
 
 To watch files for changes (and generate):
 
-    hexo generate -w
+```bash
+hexo generate -w
+```
 
 To launch a server to look at the results.
 
-    hexo server
+```bash
+hexo server
+```
 
 Note: Once the server has been launched, it looks like it won't pick up any
 changes you do, you'll have to relaunch it. Bummer, I know. But until this is
