@@ -1,4 +1,14 @@
 <% if (theme.addthis.enable) { %>
+  <script>
+    var addthis_config = {
+      'ui_language'          : 'en',
+    <% if (theme.google_analytics) { %>
+      'data_ga_property'     : '<%= theme.google_analytics %>',
+    <% } %>
+      'data_track_addressbar': false,
+      'data_track_clickback' : true
+    };
+  </script>
   <div class="addthis addthis_toolbox addthis_default_style">
     <% if (theme.addthis.facebook) { %>
       <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>

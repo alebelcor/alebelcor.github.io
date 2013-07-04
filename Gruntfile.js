@@ -74,11 +74,11 @@ module.exports = function (grunt) {
                 livereload: true
             },
             config: {
-                files: ['**/*.yml'],
-                tasks: ['clean:all', 'shell:generate']
+                files: ['**/*.yml', 'themes/**/*.ejs'],
+                tasks: ['clean:all', 'shell:generate', 'htmlmin']
             },
             posts: {
-                files: ['source/**/*.md', 'themes/**/*.ejs'],
+                files: ['source/**/*.md'],
                 tasks: ['shell:generate', 'htmlmin']
             },
             styles: {
@@ -96,5 +96,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('generate', ['shell:generate', 'htmlmin']);
-    grunt.registerTask('deploy', 'shell:deploy');
+    grunt.registerTask('deploy', ['shell:generate', 'htmlmin', 'shell:deploy']);
 };
