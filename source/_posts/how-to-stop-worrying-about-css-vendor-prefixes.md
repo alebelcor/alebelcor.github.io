@@ -182,11 +182,14 @@ require it.
 
 ## Closing thoughts
 
-Autoprefixr is configurable in a way that suits many needs. If I want to support
-the latest two versions of browsers and also IE9 (and IE8) I can.
+Autoprefixr is configurable in a way that suits many needs.
+If I want to support the latest two versions of browsers and
+also IE9 (and IE8) I can.
 
-It can integrate with Node.js and there's a Grunt plugin for it which makes it
-even easier to include in your build or development workflow.
+It can integrate with Node.js and there's a Grunt plugin for
+it which makes it even easier to include in your build or
+development workflow.
 
-But I think the absolute best would have to be that, because it uses Can I Use,
-it adapts to how the Web and Web Browsers progress automatically and effortlessly.
+But I think the absolute best would have to be that, because it
+uses Can I Use, it adapts to how the Web and Web Browsers are
+moving forward automatically and effortlessly.

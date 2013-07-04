@@ -61,10 +61,18 @@ module.exports = function (grunt) {
                     'cd .deploy',
                     'rm -rf *',
                     'cd ..',
-                    'cp -r public/* .deploy/'
+                    'cp -r public/* .deploy/',
+                    'cd .deploy',
+                    'git add -A',
+                    'git commit -m "Site updated: ' + new Date() + '"',
+                    'git push origin master'
 
                     // INFO: apparently we can't do a git push using grunt-shell
-                    // so that will have to still be a manual step
+                    // saying something like:
+                    // Warning: Command failed: Permission denied (publickey).
+                    // fatal: The remote end hung up unexpectedly
+                    //
+                    // so pushing will have to remain a manual step
                 ].join('&&')
             }
         },
