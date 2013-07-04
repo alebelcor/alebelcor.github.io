@@ -64,8 +64,7 @@ module.exports = function (grunt) {
                     'cp -r public/* .deploy/',
                     'cd .deploy',
                     'git add -A',
-                    'git commit -m "Site updated: ' + new Date() + '"',
-                    'git push origin master'
+                    'git commit -m "Site updated: ' + new Date() + '"'
 
                     // INFO: apparently we can't do a git push using grunt-shell
                     // saying something like:
