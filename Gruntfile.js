@@ -40,6 +40,21 @@ module.exports = function (grunt) {
             }
         },
 
+        imagemin: {
+            dist: {
+                options: {
+                    optimizationLevel: 7,
+                    progressive      : true
+                },
+                files: [{
+                    expand: true,
+                    cwd   : 'public',
+                    src   : '**/*.{png,jpg,jpeg,gif,webp,svg}',
+                    dest  : 'public'
+                }]
+            }
+        },
+
         connect: {
             server: {
                 options: {
@@ -95,13 +110,21 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-shell');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    // load all grunt tasks
+    require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask('generate', ['shell:generate', 'htmlmin']);
-    grunt.registerTask('deploy', ['shell:generate', 'htmlmin', 'shell:deploy']);
+    grunt.registerTask('generate', [
+        'shell:generate',
+        'imagemin',
+        'htmlmin',
+        'cssmin'
+    ]);
+
+    grunt.registerTask('deploy', [
+        'shell:generate',
+        'imagemin',
+        'htmlmin',
+        'cssmin',
+        'shell:deploy'
+    ]);
 };
