@@ -78,7 +78,7 @@ First, go into your project folder and install the `grunt-autoprefixer`
 plugin:
 
 ```bash
-npm install --save-dev grunt-autoprefixr
+npm install --save-dev grunt-autoprefixer
 ```
 
 Supposing we have a `style.css` as:
